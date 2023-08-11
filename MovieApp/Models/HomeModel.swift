@@ -29,20 +29,25 @@ struct HomeItem: Hashable {
     }
 }
 
-struct Genres: Hashable {
+struct Genres: Codable, Hashable {
     let genres: [MovieGenre]
 }
 
 struct MovieGenre: Codable, Hashable {
-    var id: String = UUID().uuidString
+    var identifier: String = UUID().uuidString
     let movieId: Int
     let name: String
     
+    enum CodingKeys: String, CodingKey {
+        case movieId = "id"
+        case name
+    }
+    
     public func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
+        hasher.combine(identifier)
     }
     
     public static func == (lhs: MovieGenre, rhs: MovieGenre) -> Bool {
-        return lhs.id == rhs.id && lhs.movieId == rhs.movieId
+        return lhs.identifier == rhs.identifier && lhs.movieId == rhs.movieId
     }
 }

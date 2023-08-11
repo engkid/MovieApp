@@ -39,7 +39,12 @@ final class HomeViewController: UIViewController {
         self.view.addSubview(collectionView)
         self.setupViews()
         self.configureDataSource()
-        self.applySnapshot()
+        
+        Task {
+            try await presenter.getGenreList()
+        }
+        
+        
     }
     
     private func setupViews(insets: UIEdgeInsets = .zero) {
@@ -123,19 +128,10 @@ final class HomeViewController: UIViewController {
         }
     }
     
-    func applySnapshot() {
+    func applySnapshot(item: [HomeItem]) {
         var snapshot = NSDiffableDataSourceSnapshot<HomeSection, HomeItem>()
         
         snapshot.appendSections([.genreList])
-        let item: [HomeItem] = [
-            .init(section: .genreList, type: .genreList(.init(movieId: 0, name: "Sci-fi"))),
-            .init(section: .genreList, type: .genreList(.init(movieId: 1, name: "Horror"))),
-            .init(section: .genreList, type: .genreList(.init(movieId: 2, name: "Adventure"))),
-            .init(section: .genreList, type: .genreList(.init(movieId: 3, name: "Drama"))),
-            .init(section: .genreList, type: .genreList(.init(movieId: 4, name: "Comedy"))),
-            .init(section: .genreList, type: .genreList(.init(movieId: 5, name: "Action")))
-            
-        ]
         snapshot.appendItems(item)
         
         dataSource.apply(snapshot, animatingDifferences: true)

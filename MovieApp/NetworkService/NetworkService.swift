@@ -27,20 +27,28 @@ class NetworkService {
     
     private init() {}
     
-    func performRequest<T: Decodable, U: Encodable>(method: HTTPMethod = .get, url: URL, payload: U? = nil) async throws -> T {
-        var request = URLRequest(url: url)
+    func performRequest<T: Decodable>(method: HTTPMethod = .get, url: URL) async throws -> T {
+        let queryItems = [URLQueryItem(name: "api_key", value: AppConstants.apiKey)]
+        var components = URLComponents(url: url, resolvingAgainstBaseURL: true)
+        components?.queryItems = queryItems
+        
+        guard let finalURL = components?.url else {
+            throw NetworkError.invalidURL
+        }
+        
+        var request = URLRequest(url: finalURL)
         request.httpMethod = method.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        if let payload = payload {
-            do {
-                let encoder = JSONEncoder()
-                let payloadData = try encoder.encode(payload)
-                request.httpBody = payloadData
-            } catch {
-                throw NetworkError.encodingError
-            }
-        }
+//        if let payload = payload {
+//            do {
+//                let encoder = JSONEncoder()
+//                let payloadData = try encoder.encode(payload)
+//                request.httpBody = payloadData
+//            } catch {
+//                throw NetworkError.encodingError
+//            }
+//        }
         
         let (data, response) = try await URLSession.shared.data(for: request)
         
@@ -50,7 +58,8 @@ class NetworkService {
             do {
                 let decodedData = try decoder.decode(T.self, from: data)
                 return decodedData
-            } catch {
+            } catch let error {
+                print(error)
                 throw NetworkError.decodingError
             }
         } else {

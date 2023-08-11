@@ -34,4 +34,21 @@ final class HomePresenter {
 // MARK: - Extensions -
 
 extension HomePresenter: HomePresenterInterface {
+    
+    func getGenreList() async throws {
+        
+        Task {
+            do {
+                
+                let genresModel = try await interactor.getGenreList()
+                
+                let homeItem = genresModel.genres.map { HomeItem(section: .genreList, type: .genreList(.init(movieId: $0.movieId, name: $0.name)))}
+                
+                view?.applySnapshot(item: homeItem)
+            } catch let error {
+                debugPrint(error)
+            }
+        }
+        
+    }
 }

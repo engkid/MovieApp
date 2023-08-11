@@ -16,4 +16,9 @@ final class HomeInteractor {
 // MARK: - Extensions -
 
 extension HomeInteractor: HomeInteractorInterface {
+    
+    func getGenreList() async throws -> Genres {
+        return try await NetworkService.shared.performRequest(url: URL(string: "\(AppConstants.basePath)/genre/movie/list")!)
+    }
+    
 }

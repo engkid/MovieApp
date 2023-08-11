@@ -15,10 +15,17 @@ protocol HomeWireframeInterface: WireframeInterface {
 }
 
 protocol HomeViewInterface: ViewInterface {
+    func applySnapshot(item: [HomeItem])
 }
 
 protocol HomePresenterInterface: PresenterInterface {
+    
+    func getGenreList() async throws
+    
 }
 
 protocol HomeInteractorInterface: InteractorInterface {
+    
+    func getGenreList() async throws -> Genres
+    
 }

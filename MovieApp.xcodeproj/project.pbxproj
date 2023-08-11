@@ -28,6 +28,7 @@
 		1EDE90C22A85DC3A000C821F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE90C12A85DC3A000C821F /* AppDelegate.swift */; };
 		1EDE90C52A866707000C821F /* UICollectionView+exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE90C42A866707000C821F /* UICollectionView+exts.swift */; };
 		1EDE90C82A867D8F000C821F /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE90C72A867D8F000C821F /* NetworkService.swift */; };
+		1EDE90CA2A868A11000C821F /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE90C92A868A11000C821F /* AppConstants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		1EDE90C12A85DC3A000C821F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1EDE90C42A866707000C821F /* UICollectionView+exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+exts.swift"; sourceTree = "<group>"; };
 		1EDE90C72A867D8F000C821F /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		1EDE90C92A868A11000C821F /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				1EDE90C42A866707000C821F /* UICollectionView+exts.swift */,
+				1EDE90C92A868A11000C821F /* AppConstants.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1EDE90B82A85CEC5000C821F /* FormatterInterface.swift in Sources */,
+				1EDE90CA2A868A11000C821F /* AppConstants.swift in Sources */,
 				1EDE90C52A866707000C821F /* UICollectionView+exts.swift in Sources */,
 				1EDE90B72A85CEC5000C821F /* InteractorInterface.swift in Sources */,
 				1EDE90AB2A85CE40000C821F /* HomeViewController.swift in Sources */,
