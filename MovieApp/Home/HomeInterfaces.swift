@@ -11,7 +11,7 @@
 import UIKit
 
 protocol HomeWireframeInterface: WireframeInterface {
-    
+    func navigate(to destination: HomeNavigationOption, navigationController: UINavigationController?)
 }
 
 protocol HomeViewInterface: ViewInterface {
@@ -19,13 +19,10 @@ protocol HomeViewInterface: ViewInterface {
 }
 
 protocol HomePresenterInterface: PresenterInterface {
-    
     func getGenreList() async throws
-    
+    func navigate(to destination: HomeNavigationOption, navigationController: UINavigationController?)
 }
 
 protocol HomeInteractorInterface: InteractorInterface {
-    
     func getGenreList() async throws -> Genres
-    
 }

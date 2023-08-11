@@ -30,4 +30,11 @@ final class HomeWireframe: BaseWireframe<HomeViewController> {
 // MARK: - Extensions -
 
 extension HomeWireframe: HomeWireframeInterface {
+    
+    func navigate(to destination: HomeNavigationOption, navigationController: UINavigationController? = nil) {
+        switch destination {
+        case .movieList:
+            navigationController?.pushWireframe(MovieListWireframe())
+        }
+    }
 }

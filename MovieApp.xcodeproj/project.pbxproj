@@ -12,6 +12,12 @@
 		1EBBF9CA2A85CC27000891DE /* MovieAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBBF9C92A85CC27000891DE /* MovieAppTests.swift */; };
 		1EBBF9D42A85CC27000891DE /* MovieAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBBF9D32A85CC27000891DE /* MovieAppUITests.swift */; };
 		1EBBF9D62A85CC27000891DE /* MovieAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBBF9D52A85CC27000891DE /* MovieAppUITestsLaunchTests.swift */; };
+		1EC9CC972A869BC300B337CE /* MovieListInterfaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC9CC922A869BC300B337CE /* MovieListInterfaces.swift */; };
+		1EC9CC982A869BC300B337CE /* MovieListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC9CC932A869BC300B337CE /* MovieListPresenter.swift */; };
+		1EC9CC992A869BC300B337CE /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC9CC942A869BC300B337CE /* MovieListViewController.swift */; };
+		1EC9CC9A2A869BC300B337CE /* MovieListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC9CC952A869BC300B337CE /* MovieListInteractor.swift */; };
+		1EC9CC9B2A869BC300B337CE /* MovieListWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC9CC962A869BC300B337CE /* MovieListWireframe.swift */; };
+		1EC9CC9D2A869D4700B337CE /* MovieListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC9CC9C2A869D4700B337CE /* MovieListModel.swift */; };
 		1EDE90A92A85CE40000C821F /* HomeInterfaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE90A42A85CE40000C821F /* HomeInterfaces.swift */; };
 		1EDE90AA2A85CE40000C821F /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE90A52A85CE40000C821F /* HomePresenter.swift */; };
 		1EDE90AB2A85CE40000C821F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE90A62A85CE40000C821F /* HomeViewController.swift */; };
@@ -58,6 +64,12 @@
 		1EBBF9CF2A85CC27000891DE /* MovieAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EBBF9D32A85CC27000891DE /* MovieAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAppUITests.swift; sourceTree = "<group>"; };
 		1EBBF9D52A85CC27000891DE /* MovieAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1EC9CC922A869BC300B337CE /* MovieListInterfaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListInterfaces.swift; sourceTree = "<group>"; };
+		1EC9CC932A869BC300B337CE /* MovieListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListPresenter.swift; sourceTree = "<group>"; };
+		1EC9CC942A869BC300B337CE /* MovieListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewController.swift; sourceTree = "<group>"; };
+		1EC9CC952A869BC300B337CE /* MovieListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListInteractor.swift; sourceTree = "<group>"; };
+		1EC9CC962A869BC300B337CE /* MovieListWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListWireframe.swift; sourceTree = "<group>"; };
+		1EC9CC9C2A869D4700B337CE /* MovieListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListModel.swift; sourceTree = "<group>"; };
 		1EDE90A42A85CE40000C821F /* HomeInterfaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInterfaces.swift; sourceTree = "<group>"; };
 		1EDE90A52A85CE40000C821F /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		1EDE90A62A85CE40000C821F /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -131,6 +143,7 @@
 				1EDE90AE2A85CEB7000C821F /* VIPERBase */,
 				1EDE90B92A85D23B000C821F /* Models */,
 				1EDE90A32A85CE2F000C821F /* Home */,
+				1EC9CC912A869BA100B337CE /* MovieList */,
 				1EDE90BC2A85D34B000C821F /* SceneDelegate.swift */,
 				1EDE90C12A85DC3A000C821F /* AppDelegate.swift */,
 				1EBBF9BB2A85CC27000891DE /* Assets.xcassets */,
@@ -155,6 +168,18 @@
 				1EBBF9D52A85CC27000891DE /* MovieAppUITestsLaunchTests.swift */,
 			);
 			path = MovieAppUITests;
+			sourceTree = "<group>";
+		};
+		1EC9CC912A869BA100B337CE /* MovieList */ = {
+			isa = PBXGroup;
+			children = (
+				1EC9CC922A869BC300B337CE /* MovieListInterfaces.swift */,
+				1EC9CC932A869BC300B337CE /* MovieListPresenter.swift */,
+				1EC9CC942A869BC300B337CE /* MovieListViewController.swift */,
+				1EC9CC952A869BC300B337CE /* MovieListInteractor.swift */,
+				1EC9CC962A869BC300B337CE /* MovieListWireframe.swift */,
+			);
+			path = MovieList;
 			sourceTree = "<group>";
 		};
 		1EDE90A32A85CE2F000C821F /* Home */ = {
@@ -185,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				1EDE90BA2A85D246000C821F /* HomeModel.swift */,
+				1EC9CC9C2A869D4700B337CE /* MovieListModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -345,14 +371,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				1EDE90B82A85CEC5000C821F /* FormatterInterface.swift in Sources */,
+				1EC9CC9A2A869BC300B337CE /* MovieListInteractor.swift in Sources */,
+				1EC9CC9D2A869D4700B337CE /* MovieListModel.swift in Sources */,
 				1EDE90CA2A868A11000C821F /* AppConstants.swift in Sources */,
+				1EC9CC972A869BC300B337CE /* MovieListInterfaces.swift in Sources */,
 				1EDE90C52A866707000C821F /* UICollectionView+exts.swift in Sources */,
 				1EDE90B72A85CEC5000C821F /* InteractorInterface.swift in Sources */,
 				1EDE90AB2A85CE40000C821F /* HomeViewController.swift in Sources */,
+				1EC9CC982A869BC300B337CE /* MovieListPresenter.swift in Sources */,
 				1EDE90A92A85CE40000C821F /* HomeInterfaces.swift in Sources */,
+				1EC9CC9B2A869BC300B337CE /* MovieListWireframe.swift in Sources */,
 				1EDE90C22A85DC3A000C821F /* AppDelegate.swift in Sources */,
 				1EDE90B42A85CEC5000C821F /* BaseWireframe.swift in Sources */,
 				1EDE90B62A85CEC5000C821F /* PresenterInterface.swift in Sources */,
+				1EC9CC992A869BC300B337CE /* MovieListViewController.swift in Sources */,
 				1EDE90B52A85CEC5000C821F /* ViewInterface.swift in Sources */,
 				1EDE90AD2A85CE40000C821F /* HomeWireframe.swift in Sources */,
 				1EDE90C82A867D8F000C821F /* NetworkService.swift in Sources */,
