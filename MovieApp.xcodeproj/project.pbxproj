@@ -27,6 +27,7 @@
 		1EDE90C02A85D431000C821F /* GenreListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE90BF2A85D431000C821F /* GenreListCell.swift */; };
 		1EDE90C22A85DC3A000C821F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE90C12A85DC3A000C821F /* AppDelegate.swift */; };
 		1EDE90C52A866707000C821F /* UICollectionView+exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE90C42A866707000C821F /* UICollectionView+exts.swift */; };
+		1EDE90C82A867D8F000C821F /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE90C72A867D8F000C821F /* NetworkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		1EDE90BF2A85D431000C821F /* GenreListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreListCell.swift; sourceTree = "<group>"; };
 		1EDE90C12A85DC3A000C821F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1EDE90C42A866707000C821F /* UICollectionView+exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+exts.swift"; sourceTree = "<group>"; };
+		1EDE90C72A867D8F000C821F /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 		1EBBF9B12A85CC26000891DE /* MovieApp */ = {
 			isa = PBXGroup;
 			children = (
+				1EDE90C62A867D84000C821F /* NetworkService */,
 				1EDE90C32A8666FB000C821F /* Utils */,
 				1EDE90BE2A85D41A000C821F /* CellViews */,
 				1EDE90AE2A85CEB7000C821F /* VIPERBase */,
@@ -198,6 +201,14 @@
 				1EDE90C42A866707000C821F /* UICollectionView+exts.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		1EDE90C62A867D84000C821F /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				1EDE90C72A867D8F000C821F /* NetworkService.swift */,
+			);
+			path = NetworkService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -340,6 +351,7 @@
 				1EDE90B62A85CEC5000C821F /* PresenterInterface.swift in Sources */,
 				1EDE90B52A85CEC5000C821F /* ViewInterface.swift in Sources */,
 				1EDE90AD2A85CE40000C821F /* HomeWireframe.swift in Sources */,
+				1EDE90C82A867D8F000C821F /* NetworkService.swift in Sources */,
 				1EDE90BD2A85D34B000C821F /* SceneDelegate.swift in Sources */,
 				1EDE90BB2A85D246000C821F /* HomeModel.swift in Sources */,
 				1EDE90AC2A85CE40000C821F /* HomeInteractor.swift in Sources */,

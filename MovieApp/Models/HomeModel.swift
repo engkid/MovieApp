@@ -16,17 +16,25 @@ enum CellType: Hashable {
 }
 
 struct HomeItem: Hashable {
-    let identifier: String = UUID().uuidString
+    var identifier: String = UUID().uuidString
     let section: HomeSection
     let type: CellType
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(identifier)
+    }
+    
+    public static func == (lhs: HomeItem, rhs: HomeItem) -> Bool {
+        return lhs.identifier == rhs.identifier
+    }
 }
 
 struct Genres: Hashable {
     let genres: [MovieGenre]
 }
 
-struct MovieGenre: Hashable {
-    let id: String = UUID().uuidString
+struct MovieGenre: Codable, Hashable {
+    var id: String = UUID().uuidString
     let movieId: Int
     let name: String
     

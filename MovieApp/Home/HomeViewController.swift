@@ -120,7 +120,6 @@ final class HomeViewController: UIViewController {
                 
                 return cell
             }
-            
         }
     }
     
