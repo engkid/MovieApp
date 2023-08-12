@@ -2,7 +2,7 @@
 //  MovieAppUITestsLaunchTests.swift
 //  MovieAppUITests
 //
-//  Created by Engkit on 11/08/23.
+//  Created by k1d_dev on 11/08/23.
 //
 
 import XCTest

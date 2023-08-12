@@ -2,7 +2,7 @@
 //  NetworkService.swift
 //  MovieApp
 //
-//  Created by Engkit on 11/08/23.
+//  Created by k1d_dev on 11/08/23.
 //
 
 import Foundation
@@ -27,9 +27,21 @@ class NetworkService {
     
     private init() {}
     
-    func performRequest<T: Decodable>(method: HTTPMethod = .get, url: URL) async throws -> T {
-        let queryItems = [URLQueryItem(name: "api_key", value: AppConstants.apiKey)]
+    func performRequest<T: Decodable>(method: HTTPMethod = .get, url: URL, payload: [String: String]? = nil) async throws -> T {
+        var queryItems = [URLQueryItem(name: "api_key", value: AppConstants.apiKey)]
         var components = URLComponents(url: url, resolvingAgainstBaseURL: true)
+       
+        
+        if let payload = payload {
+            
+            let payloadComponents = payload.map { key, value in
+                URLQueryItem(name: key, value: value)
+            }
+            
+            queryItems.append(contentsOf: payloadComponents)
+            
+        }
+        
         components?.queryItems = queryItems
         
         guard let finalURL = components?.url else {
@@ -40,15 +52,14 @@ class NetworkService {
         request.httpMethod = method.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-//        if let payload = payload {
-//            do {
-//                let encoder = JSONEncoder()
-//                let payloadData = try encoder.encode(payload)
-//                request.httpBody = payloadData
-//            } catch {
-//                throw NetworkError.encodingError
-//            }
-//        }
+        if method == .post {
+            do {
+                let payloadData = try JSONSerialization.data(withJSONObject: payload as Any)
+                request.httpBody = payloadData
+            } catch {
+                throw NetworkError.decodingError
+            }
+        }
         
         let (data, response) = try await URLSession.shared.data(for: request)
         
@@ -58,8 +69,7 @@ class NetworkService {
             do {
                 let decodedData = try decoder.decode(T.self, from: data)
                 return decodedData
-            } catch let error {
-                print(error)
+            } catch {
                 throw NetworkError.decodingError
             }
         } else {
