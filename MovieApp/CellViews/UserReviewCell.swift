@@ -46,6 +46,13 @@ final class UserReviewCell: UICollectionViewCell {
         return horizontalStackView
     }()
     
+    private let separatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemGray
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setupViews()
@@ -67,6 +74,7 @@ final class UserReviewCell: UICollectionViewCell {
         horizontalStackView.addArrangedSubview(self.createdAtLabel)
         contentView.addSubview(horizontalStackView)
         contentView.addSubview(reviewLabel)
+        contentView.addSubview(separatorView)
         
         // Create constraints for the horizontal stack view
         NSLayoutConstraint.activate([
@@ -75,18 +83,22 @@ final class UserReviewCell: UICollectionViewCell {
             horizontalStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8.0),
         ])
         
-        // Create constraints for the authorLabel within the horizontal stack view
-//        NSLayoutConstraint.activate([
-//            authorLabel.widthAnchor.constraint(lessThanOrEqualTo: horizontalStackView.widthAnchor, multiplier: 0.5), // Set a width constraint if needed
-//        ])
-//
-//        // Create constraints for the reviewLabel
         NSLayoutConstraint.activate([
             reviewLabel.topAnchor.constraint(equalTo: horizontalStackView.bottomAnchor, constant: 8.0),
             reviewLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8.0),
             reviewLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8.0),
-            reviewLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8.0),
+            reviewLabel.bottomAnchor.constraint(equalTo: separatorView.topAnchor, constant: -8.0),
         ])
+        
+        NSLayoutConstraint.activate([
+            separatorView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8.0),
+            separatorView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8.0),
+            separatorView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8.0),
+            separatorView.topAnchor.constraint(equalTo: reviewLabel.bottomAnchor, constant: 8.0),
+            separatorView.heightAnchor.constraint(equalToConstant: 0.8),
+        ])
+        
+        
     }
     
 }
