@@ -57,17 +57,17 @@ extension MovieDetailPresenter: MovieDetailPresenterInterface {
         
         reviewDetailItem.append(movieDetailItem)
         
-        let reviewResults = try? await interactor.getMovieReviews(id: "\(interactor.movie.id)")
-        let trailerResults = try? await interactor.getMovieTrailers(id: "\(interactor.movie.id)")
+        async let reviewResults = try? await interactor.getMovieReviews(id: "\(interactor.movie.id)")
+        async let trailerResults = try? await interactor.getMovieTrailers(id: "\(interactor.movie.id)")
         
-        if let reviews = reviewResults?.results as? [UserReview] {
+        if let reviews = await reviewResults?.results as? [UserReview] {
             
             let reviewItems = reviews.map { MovieDetailItem(section: .userReview, type: .userReviews($0)) }
             reviewDetailItem.append(contentsOf: reviewItems)
             
         }
         
-        if let trailers = trailerResults?.results, !trailers.isEmpty {
+        if let trailers = await trailerResults?.results, !trailers.isEmpty {
             let randomIndex = Int.random(in: 0..<trailers.count)
             let randomTrailerKey = trailers[randomIndex].key
             
