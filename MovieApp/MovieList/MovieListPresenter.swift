@@ -39,7 +39,7 @@ extension MovieListPresenter: MovieListPresenterInterface {
     func discoverMovie() async throws {
         
         Task {
-            let movieListResult: MovieResults? = try? await interactor.discoverMovie(by: interactor.movieId)
+            let movieListResult: TMDBApiResult<Movie>? = try? await interactor.discoverMovie(by: interactor.movieId)
             
             if let movies = movieListResult?.results as? [Movie] {
                 let movieListItem = movies.map { movie in

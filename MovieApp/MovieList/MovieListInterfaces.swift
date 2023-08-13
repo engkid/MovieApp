@@ -25,5 +25,5 @@ protocol MovieListPresenterInterface: PresenterInterface {
 
 protocol MovieListInteractorInterface: InteractorInterface {
     var movieId: String { get }
-    func discoverMovie(by id: String) async throws -> MovieResults?
+    func discoverMovie(by id: String) async throws -> TMDBApiResult<Movie>?
 }

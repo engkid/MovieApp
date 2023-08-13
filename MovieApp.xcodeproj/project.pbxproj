@@ -19,6 +19,7 @@
 		1EBAA94B2A88491C006E6C11 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBAA94A2A88491C006E6C11 /* GradientView.swift */; };
 		1EBAA94F2A886B3B006E6C11 /* MovieDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBAA94E2A886B3B006E6C11 /* MovieDetailCell.swift */; };
 		1EBAA9512A886F0F006E6C11 /* MovieDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBAA9502A886F0F006E6C11 /* MovieDetailModel.swift */; };
+		1EBAA9552A88B163006E6C11 /* TMDBAPIResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBAA9542A88B163006E6C11 /* TMDBAPIResult.swift */; };
 		1EBBF9BC2A85CC27000891DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EBBF9BB2A85CC27000891DE /* Assets.xcassets */; };
 		1EBBF9BF2A85CC27000891DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EBBF9BD2A85CC27000891DE /* LaunchScreen.storyboard */; };
 		1EBBF9CA2A85CC27000891DE /* MovieAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBBF9C92A85CC27000891DE /* MovieAppTests.swift */; };
@@ -79,6 +80,7 @@
 		1EBAA94A2A88491C006E6C11 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		1EBAA94E2A886B3B006E6C11 /* MovieDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailCell.swift; sourceTree = "<group>"; };
 		1EBAA9502A886F0F006E6C11 /* MovieDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailModel.swift; sourceTree = "<group>"; };
+		1EBAA9542A88B163006E6C11 /* TMDBAPIResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBAPIResult.swift; sourceTree = "<group>"; };
 		1EBBF9AF2A85CC26000891DE /* MovieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EBBF9BB2A85CC27000891DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1EBBF9BE2A85CC27000891DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 		1EDE90B92A85D23B000C821F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1EBAA9542A88B163006E6C11 /* TMDBAPIResult.swift */,
 				1EDE90BA2A85D246000C821F /* HomeModel.swift */,
 				1EC9CC9C2A869D4700B337CE /* MovieListModel.swift */,
 				1EBAA9502A886F0F006E6C11 /* MovieDetailModel.swift */,
@@ -456,6 +459,7 @@
 				1EDE90B52A85CEC5000C821F /* ViewInterface.swift in Sources */,
 				1EBAA93C2A87CF75006E6C11 /* String+exts.swift in Sources */,
 				1EDE90AD2A85CE40000C821F /* HomeWireframe.swift in Sources */,
+				1EBAA9552A88B163006E6C11 /* TMDBAPIResult.swift in Sources */,
 				1EDE90C82A867D8F000C821F /* NetworkService.swift in Sources */,
 				1EDE90BD2A85D34B000C821F /* SceneDelegate.swift in Sources */,
 				1EDE90BB2A85D246000C821F /* HomeModel.swift in Sources */,

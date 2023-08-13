@@ -11,24 +11,6 @@ enum MovieListNavigationOption {
     case movieDetails(Movie)
 }
 
-enum MovieListSection: Int, CaseIterable, Hashable {
-    case movieList
-}
-
-struct MovieResults: Codable {
-    let page: Int
-    let results: [Movie]
-    let totalPages: Int
-    let totalResults: Int
-    
-    enum CodingKeys: String, CodingKey {
-        case page
-        case results
-        case totalPages = "total_pages"
-        case totalResults = "total_results"
-    }
-}
-
 struct Movie: Codable, Hashable {
     var identifier: String = UUID().uuidString
     let adult: Bool
@@ -91,6 +73,10 @@ extension MovieListEndpoint: MovieAPISetup {
             return "/discover/movie"
         }
     }
+}
+
+enum MovieListSection: Int, CaseIterable, Hashable {
+    case movieList
 }
 
 enum MovieListCellType: Hashable {
