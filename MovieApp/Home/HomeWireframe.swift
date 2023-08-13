@@ -34,8 +34,7 @@ extension HomeWireframe: HomeWireframeInterface {
     func navigate(to destination: HomeNavigationOption, navigationController: UINavigationController? = nil) {
         switch destination {
         case .movieList(let movieId):
-            navigationController?.pushWireframe(MovieListWireframe(movieId: movieId
-                                                                  ))
+            navigationController?.pushWireframe(MovieListWireframe(movieId: movieId))
         }
     }
 }

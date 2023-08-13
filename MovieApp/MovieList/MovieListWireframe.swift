@@ -12,8 +12,6 @@ import UIKit
 
 final class MovieListWireframe: BaseWireframe<MovieListViewController> {
 
-    // MARK: - Private properties -
-
     // MARK: - Module setup -
 
     init(movieId: String) {
@@ -30,4 +28,13 @@ final class MovieListWireframe: BaseWireframe<MovieListViewController> {
 // MARK: - Extensions -
 
 extension MovieListWireframe: MovieListWireframeInterface {
+    
+    func navigateToMovieDetails(destination: MovieListNavigationOption, _ navigationController: UINavigationController? = nil) {
+        switch destination {
+        case .movieDetails(let movie):
+            navigationController?.pushWireframe(MovieDetailWireframe(movie: movie))
+            return
+        }
+    }
+    
 }

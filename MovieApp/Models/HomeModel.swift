@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum HomeNavigationOption {
+    case movieList(_ movieId: String)
+}
+
 enum HomeSection: Int, CaseIterable, Hashable {
     case genreList
 }
@@ -68,7 +72,6 @@ extension GenreEndpoint: MovieAPISetup {
             return nil
         }
     }
-    
     
     private var endpoint: String {
         switch self {

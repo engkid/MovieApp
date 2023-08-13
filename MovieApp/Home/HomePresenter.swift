@@ -59,7 +59,3 @@ extension HomePresenter: HomePresenterInterface {
         }
     }
 }
-
-enum HomeNavigationOption {
-    case movieList(_ movieId: String)
-}

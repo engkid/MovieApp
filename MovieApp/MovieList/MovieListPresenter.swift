@@ -9,6 +9,7 @@
 //
 
 import Foundation
+import UIKit
 
 final class MovieListPresenter {
 
@@ -38,7 +39,7 @@ extension MovieListPresenter: MovieListPresenterInterface {
     func discoverMovie() async throws {
         
         Task {
-            let movieListResult: MovieResults? = try? await interactor.discoverMovie(by: interactor.movieId ?? "")
+            let movieListResult: MovieResults? = try? await interactor.discoverMovie(by: interactor.movieId)
             
             if let movies = movieListResult?.results as? [Movie] {
                 let movieListItem = movies.map { movie in
@@ -48,6 +49,13 @@ extension MovieListPresenter: MovieListPresenterInterface {
                 view?.applySnapshot(item: movieListItem)
             }
             
+        }
+    }
+    
+    func navigate(to destination: MovieListNavigationOption, navigationController: UINavigationController?) {
+        switch destination {
+        case .movieDetails(let movie):
+            wireframe.navigateToMovieDetails(destination: .movieDetails(movie), navigationController)
         }
     }
     

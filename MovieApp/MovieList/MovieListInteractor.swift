@@ -13,12 +13,12 @@ import Foundation
 final class MovieListInteractor {
     
     // MARK: - Public properties -
-    var movieId: String?
+    var movieId: String
     
     // MARK: - Private properties -
     private let service: NetworkService
     
-    init(movieId: String?, service: NetworkService = NetworkService.shared) {
+    init(movieId: String, service: NetworkService = NetworkService.shared) {
         self.movieId = movieId
         self.service = service
     }

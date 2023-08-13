@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum MovieListNavigationOption {
+    case movieDetails(Movie)
+}
+
 enum MovieListSection: Int, CaseIterable, Hashable {
     case movieList
 }
