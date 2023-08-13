@@ -50,7 +50,7 @@ extension MovieDetailPresenter: MovieDetailPresenterInterface {
     
     
     func viewDidLoad() async throws {
-        // TODO: - Handle user review and youtube movie trailer here -> make it parallel but depend on each other once finished
+        
         var reviewDetailItem: [MovieDetailItem] = []
         let movie = interactor.movie
         let movieDetailItem = MovieDetailItem(section: .moviedetail, type: .movieDetail(movie))
