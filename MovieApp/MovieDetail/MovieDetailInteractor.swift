@@ -34,4 +34,12 @@ extension MovieDetailInteractor: MovieDetailInteractorInterface {
         }
         return nil
     }
+    
+    func getMovieTrailers(id: String) async throws -> TMDBApiResult<MovieTrailer>? {
+        if let url = MovieDetailEndpoint.movieTrailer(id).urlEndpoint {
+            return try await self.service.performRequest(url: url)
+        }
+        
+        return nil
+    }
 }

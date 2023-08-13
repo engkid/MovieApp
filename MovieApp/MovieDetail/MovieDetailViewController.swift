@@ -42,7 +42,6 @@ final class MovieDetailViewController: UIViewController {
         Task {
             try await self.presenter.viewDidLoad()
         }
-        
     }
     
     // MARK: - Private functions -

@@ -30,7 +30,6 @@ enum MovieDetailCellType: Hashable {
             return false
         }
     }
-    
 }
 
 struct MovieDetailItem: Hashable {

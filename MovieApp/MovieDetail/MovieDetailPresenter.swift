@@ -58,6 +58,7 @@ extension MovieDetailPresenter: MovieDetailPresenterInterface {
         reviewDetailItem.append(movieDetailItem)
         
         let reviewResults = try? await interactor.getMovieReviews(id: "\(interactor.movie.id)")
+        let trailerResults = try? await interactor.getMovieTrailers(id: "\(interactor.movie.id)")
         
         if let reviews = reviewResults?.results as? [UserReview] {
             
@@ -66,7 +67,8 @@ extension MovieDetailPresenter: MovieDetailPresenterInterface {
             
         }
         
-        reviewDetailItem.append(MovieDetailItem(section: .movieTrailer, type: .movieTrailer("74Ie5QZC3Mc")))
+        let trailerId = trailerResults?.results.first?.key ?? ""
+        reviewDetailItem.append(MovieDetailItem(section: .movieTrailer, type: .movieTrailer(trailerId)))
         
         view?.applySnapshot(items: reviewDetailItem)
     }

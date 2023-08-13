@@ -9,10 +9,10 @@ import Foundation
 
 struct TMDBApiResult<T: Codable>: Codable {
     let id: Int?
-    let page: Int
+    let page: Int?
     let results: [T]
-    let totalPages: Int
-    let totalResults: Int
+    let totalPages: Int?
+    let totalResults: Int?
     
     enum CodingKeys: String, CodingKey {
         case id, page, results

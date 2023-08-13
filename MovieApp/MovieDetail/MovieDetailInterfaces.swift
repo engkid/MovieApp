@@ -27,4 +27,5 @@ protocol MovieDetailInteractorInterface: InteractorInterface {
     var movie: Movie { get }
     
     func getMovieReviews(id: String) async throws -> TMDBApiResult<UserReview>?
+    func getMovieTrailers(id: String) async throws -> TMDBApiResult<MovieTrailer>?
 }
