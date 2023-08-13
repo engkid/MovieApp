@@ -13,7 +13,11 @@ final class SectionTitleReusableView: UICollectionReusableView {
         return String(describing: SectionTitleReusableView.self)
     }
     
-    private let titleLabel = UILabel()
+    private let titleLabel: UILabel = {
+        let titleLabel = UILabel()
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 23)
+        return titleLabel
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,7 +43,7 @@ private extension SectionTitleReusableView {
         
         addSubview(titleLabel)
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8.0),
             titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }

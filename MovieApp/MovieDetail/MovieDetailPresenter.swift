@@ -66,6 +66,8 @@ extension MovieDetailPresenter: MovieDetailPresenterInterface {
             
         }
         
+        reviewDetailItem.append(MovieDetailItem(section: .movieTrailer, type: .movieTrailer("74Ie5QZC3Mc")))
+        
         view?.applySnapshot(items: reviewDetailItem)
     }
     

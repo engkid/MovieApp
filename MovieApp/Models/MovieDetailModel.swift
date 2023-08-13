@@ -15,7 +15,7 @@ enum MovieDetailSection: Int, CaseIterable, Hashable {
 
 enum MovieDetailCellType: Hashable {
     case movieDetail(Movie)
-    case movieTrailer
+    case movieTrailer(String)
     case userReviews(UserReview)
     
     static func ==(lhs: MovieDetailCellType, rhs: MovieDetailCellType) -> Bool {

@@ -50,7 +50,9 @@ final class MovieDetailViewController: UIViewController {
     private func setupViews(insets: UIEdgeInsets = .zero) {
         
         collectionView.registerCellWithoutNib(MovieDetailCell.self)
+        collectionView.registerCellWithoutNib(MovieTrailerCell.self)
         collectionView.registerCellWithoutNib(UserReviewCell.self)
+        collectionView.registerHeaderWithoutNib(SectionTitleReusableView.self)
         
         NSLayoutConstraint.activate([
             self.collectionView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: insets.top),
@@ -63,9 +65,6 @@ final class MovieDetailViewController: UIViewController {
     
     private func createLayout() -> UICollectionViewCompositionalLayout {
         
-        let config = UICollectionViewCompositionalLayoutConfiguration()
-        config.interSectionSpacing = 16
-        
         return UICollectionViewCompositionalLayout(sectionProvider: { sectionIndex, _ in
             let sections = MovieDetailSection(rawValue: sectionIndex)
             
@@ -75,21 +74,21 @@ final class MovieDetailViewController: UIViewController {
                 let item = NSCollectionLayoutItem(
                     layoutSize: .init(
                         widthDimension: .fractionalWidth(1),
-                        heightDimension: .fractionalHeight(0.75)
+                        heightDimension: .fractionalHeight(1)
                     )
                 )
                 let group = NSCollectionLayoutGroup.vertical(
                     layoutSize: .init(
                         widthDimension: .fractionalWidth(1),
-                        heightDimension: .fractionalHeight(1)
+                        heightDimension: .estimated(650)
                     ),
                     subitems: [item]
                 )
                 let section = NSCollectionLayoutSection(group: group)
                 section.contentInsets = .init(
-                    top: 16,
+                    top: 0,
                     leading: 16,
-                    bottom: 20,
+                    bottom: 0,
                     trailing: 16
                 )
                 return section
@@ -97,48 +96,66 @@ final class MovieDetailViewController: UIViewController {
                 let item = NSCollectionLayoutItem(
                     layoutSize: .init(
                         widthDimension: .fractionalWidth(1),
-                        heightDimension: .estimated(1)
+                        heightDimension: .fractionalWidth(1)
                     )
                 )
-                let group = NSCollectionLayoutGroup.horizontal(
+                let group = NSCollectionLayoutGroup.vertical(
                     layoutSize: .init(
-                        widthDimension: .absolute(1),
-                        heightDimension: .estimated(1)
+                        widthDimension: .fractionalWidth(1),
+                        heightDimension: .estimated(270)
                     ),
                     subitems: [item]
                 )
                 
                 let section = NSCollectionLayoutSection(group: group)
                 section.contentInsets = .init(
-                    top: 16,
+                    top: 0,
                     leading: 16,
-                    bottom: 20,
+                    bottom: 0,
                     trailing: 16
                 )
+                
+                let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
+                let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+                    layoutSize: headerSize,
+                    elementKind: UICollectionView.elementKindSectionHeader,
+                    alignment: .top
+                )
+                
+                section.boundarySupplementaryItems = [sectionHeader]
                 
                 return section
             case .userReview:
                 let item = NSCollectionLayoutItem(
                     layoutSize: .init(
                         widthDimension: .fractionalWidth(1),
-                        heightDimension: .estimated(130)
+                        heightDimension: .estimated(135)
                     )
                 )
-                let group = NSCollectionLayoutGroup.horizontal(
+                let group = NSCollectionLayoutGroup.vertical(
                     layoutSize: .init(
                         widthDimension: .fractionalWidth(1),
-                        heightDimension: .estimated(130)
+                        heightDimension: .estimated(135)
                     ),
                     subitems: [item]
                 )
                 
                 let section = NSCollectionLayoutSection(group: group)
                 section.contentInsets = .init(
-                    top: 16,
+                    top: 0,
                     leading: 16,
-                    bottom: 20,
+                    bottom: 0,
                     trailing: 16
                 )
+                
+                let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
+                let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+                    layoutSize: headerSize,
+                    elementKind: UICollectionView.elementKindSectionHeader,
+                    alignment: .top
+                )
+                
+                section.boundarySupplementaryItems = [sectionHeader]
                 
                 return section
             case .none:
@@ -160,11 +177,12 @@ final class MovieDetailViewController: UIViewController {
                 
                 return section
             }
-        }, configuration: config)
+        })
     }
 
     private func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<MovieDetailSection, MovieDetailItem>(collectionView: collectionView) { (collectionView, indexPath, itemIdentifier) -> UICollectionViewCell? in
+        dataSource = UICollectionViewDiffableDataSource<MovieDetailSection, MovieDetailItem>(collectionView: collectionView) {(collectionView, indexPath, itemIdentifier) -> UICollectionViewCell? in
+            
             switch itemIdentifier.type {
             case .movieDetail(let movie):
                 let cell = collectionView.dequeueReusableCell(withClass: MovieDetailCell.self, for: indexPath)
@@ -172,10 +190,10 @@ final class MovieDetailViewController: UIViewController {
                 cell.configure(model: movie)
                 
                 return cell
-            case .movieTrailer:
-                let cell = collectionView.dequeueReusableCell(withClass: MovieDetailCell.self, for: indexPath)
+            case .movieTrailer(let movieId):
+                let cell = collectionView.dequeueReusableCell(withClass: MovieTrailerCell.self, for: indexPath)
                 
-//                cell.configure(model: movie)
+                cell.configure(movieId)
                 
                 return cell
             case .userReviews(let userReview):
@@ -186,8 +204,33 @@ final class MovieDetailViewController: UIViewController {
                 return cell
             }
         }
+        
+        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
+            guard let section = MovieDetailSection(rawValue: indexPath.section) else {
+                return nil
+            }
+            
+            switch kind {
+            case UICollectionView.elementKindSectionHeader:
+                
+                switch section {
+                case .userReview:
+                    let headerView: SectionTitleReusableView = collectionView.dequeueHeader(SectionTitleReusableView.self, indexPath: indexPath)
+                    headerView.configure(with: "User Reviews")
+                    return headerView
+                case .movieTrailer:
+                    let headerView: SectionTitleReusableView = collectionView.dequeueHeader(SectionTitleReusableView.self, indexPath: indexPath)
+                    headerView.configure(with: "Movie Trailer")
+                    return headerView
+                default:
+                    return nil
+                }
+            default:
+                return nil
+            }
+        }
+        
     }
-    
 }
 
 // MARK: - Extensions -
@@ -206,9 +249,8 @@ extension MovieDetailViewController: MovieDetailViewInterface {
                 snapshot.appendItems([.init(section: .moviedetail, type: .movieDetail(movie))], toSection: .moviedetail)
             case .userReviews(let review):
                 snapshot.appendItems([.init(section: .userReview, type: .userReviews(review))], toSection: .userReview)
-            case .movieTrailer:
-                
-                return
+            case .movieTrailer(let movieId):
+                snapshot.appendItems([.init(section: .movieTrailer, type: .movieTrailer(movieId))], toSection: .movieTrailer)
             }
         }
         
