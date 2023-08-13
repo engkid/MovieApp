@@ -14,15 +14,17 @@ protocol MovieDetailWireframeInterface: WireframeInterface {
 }
 
 protocol MovieDetailViewInterface: ViewInterface {
-    func applySnapshot(item: [MovieDetailItem])
+    func applySnapshot(items: [MovieDetailItem])
 }
 
 protocol MovieDetailPresenterInterface: PresenterInterface {
     var title: String { get set }
     
-    func viewDidLoad()
+    func viewDidLoad() async throws
 }
 
 protocol MovieDetailInteractorInterface: InteractorInterface {
     var movie: Movie { get }
+    
+    func getMovieReviews(id: String) async throws -> TMDBApiResult<UserReview>?
 }

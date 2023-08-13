@@ -8,13 +8,13 @@
 import Foundation
 
 extension String {
-    func formatToHumanReadableDate(inputFormat: String, outputStyle: DateFormatter.Style) -> String {
+    func formatToHumanReadableDate(inputFormat: String, outputFormat: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = inputFormat
         
         if let date = dateFormatter.date(from: self) {
             let humanReadableFormatter = DateFormatter()
-            humanReadableFormatter.dateStyle = outputStyle
+            humanReadableFormatter.dateFormat = outputFormat
             return humanReadableFormatter.string(from: date)
         } else {
             return "Invalid date format"

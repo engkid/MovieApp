@@ -49,10 +49,24 @@ extension MovieDetailPresenter: MovieDetailPresenterInterface {
     }
     
     
-    func viewDidLoad() {
+    func viewDidLoad() async throws {
+        // TODO: - Handle user review and youtube movie trailer here -> make it parallel but depend on each other once finished
+        var reviewDetailItem: [MovieDetailItem] = []
         let movie = interactor.movie
         let movieDetailItem = MovieDetailItem(section: .moviedetail, type: .movieDetail(movie))
-        view?.applySnapshot(item: [movieDetailItem])
+        
+        reviewDetailItem.append(movieDetailItem)
+        
+        let reviewResults = try? await interactor.getMovieReviews(id: "\(interactor.movie.id)")
+        
+        if let reviews = reviewResults?.results as? [UserReview] {
+            
+            let reviewItems = reviews.map { MovieDetailItem(section: .userReview, type: .userReviews($0)) }
+            reviewDetailItem.append(contentsOf: reviewItems)
+            
+        }
+        
+        view?.applySnapshot(items: reviewDetailItem)
     }
     
 }

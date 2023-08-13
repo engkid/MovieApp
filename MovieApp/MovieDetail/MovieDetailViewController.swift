@@ -38,7 +38,11 @@ final class MovieDetailViewController: UIViewController {
         self.title = presenter.title
         self.setupViews()
         self.configureDataSource()
-        self.presenter.viewDidLoad()
+        
+        Task {
+            try await self.presenter.viewDidLoad()
+        }
+        
     }
     
     // MARK: - Private functions -
@@ -46,6 +50,7 @@ final class MovieDetailViewController: UIViewController {
     private func setupViews(insets: UIEdgeInsets = .zero) {
         
         collectionView.registerCellWithoutNib(MovieDetailCell.self)
+        collectionView.registerCellWithoutNib(UserReviewCell.self)
         
         NSLayoutConstraint.activate([
             self.collectionView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: insets.top),
@@ -70,13 +75,13 @@ final class MovieDetailViewController: UIViewController {
                 let item = NSCollectionLayoutItem(
                     layoutSize: .init(
                         widthDimension: .fractionalWidth(1),
-                        heightDimension: .estimated(350)
+                        heightDimension: .fractionalHeight(0.75)
                     )
                 )
                 let group = NSCollectionLayoutGroup.vertical(
                     layoutSize: .init(
                         widthDimension: .fractionalWidth(1),
-                        heightDimension: .estimated(350)
+                        heightDimension: .fractionalHeight(1)
                     ),
                     subitems: [item]
                 )
@@ -92,36 +97,48 @@ final class MovieDetailViewController: UIViewController {
                 let item = NSCollectionLayoutItem(
                     layoutSize: .init(
                         widthDimension: .fractionalWidth(1),
-                        heightDimension: .fractionalHeight(1)
+                        heightDimension: .estimated(1)
                     )
                 )
                 let group = NSCollectionLayoutGroup.horizontal(
                     layoutSize: .init(
-                        widthDimension: .absolute(0),
-                        heightDimension: .absolute(0)
-                    ),
-                    subitems: [item]
-                )
-                
-                let section = NSCollectionLayoutSection(group: group)
-                
-                return section
-            case .userReview:
-                let item = NSCollectionLayoutItem(
-                    layoutSize: .init(
-                        widthDimension: .fractionalWidth(1),
-                        heightDimension: .fractionalHeight(1)
-                    )
-                )
-                let group = NSCollectionLayoutGroup.horizontal(
-                    layoutSize: .init(
-                        widthDimension: .estimated(1),
+                        widthDimension: .absolute(1),
                         heightDimension: .estimated(1)
                     ),
                     subitems: [item]
                 )
                 
                 let section = NSCollectionLayoutSection(group: group)
+                section.contentInsets = .init(
+                    top: 16,
+                    leading: 16,
+                    bottom: 20,
+                    trailing: 16
+                )
+                
+                return section
+            case .userReview:
+                let item = NSCollectionLayoutItem(
+                    layoutSize: .init(
+                        widthDimension: .fractionalWidth(1),
+                        heightDimension: .estimated(130)
+                    )
+                )
+                let group = NSCollectionLayoutGroup.horizontal(
+                    layoutSize: .init(
+                        widthDimension: .fractionalWidth(1),
+                        heightDimension: .estimated(130)
+                    ),
+                    subitems: [item]
+                )
+                
+                let section = NSCollectionLayoutSection(group: group)
+                section.contentInsets = .init(
+                    top: 16,
+                    leading: 16,
+                    bottom: 20,
+                    trailing: 16
+                )
                 
                 return section
             case .none:
@@ -161,10 +178,10 @@ final class MovieDetailViewController: UIViewController {
 //                cell.configure(model: movie)
                 
                 return cell
-            case .userReviews:
-                let cell = collectionView.dequeueReusableCell(withClass: MovieDetailCell.self, for: indexPath)
+            case .userReviews(let userReview):
+                let cell = collectionView.dequeueReusableCell(withClass: UserReviewCell.self, for: indexPath)
                 
-//                cell.configure(model: movie)
+                cell.configure(review: userReview)
                 
                 return cell
             }
@@ -177,11 +194,23 @@ final class MovieDetailViewController: UIViewController {
 
 extension MovieDetailViewController: MovieDetailViewInterface {
     
-    func applySnapshot(item: [MovieDetailItem]) {
+    func applySnapshot(items: [MovieDetailItem]) {
         var snapshot = NSDiffableDataSourceSnapshot<MovieDetailSection, MovieDetailItem>()
         
-        snapshot.appendSections([.moviedetail])
-        snapshot.appendItems(item)
+        snapshot.appendSections([.moviedetail, .movieTrailer, .userReview])
+        
+        for item in items {
+            
+            switch item.type {
+            case .movieDetail(let movie):
+                snapshot.appendItems([.init(section: .moviedetail, type: .movieDetail(movie))], toSection: .moviedetail)
+            case .userReviews(let review):
+                snapshot.appendItems([.init(section: .userReview, type: .userReviews(review))], toSection: .userReview)
+            case .movieTrailer:
+                
+                return
+            }
+        }
         
         dataSource.apply(snapshot, animatingDifferences: true)
     }

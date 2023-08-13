@@ -46,7 +46,7 @@ final class MovieListCell: UICollectionViewCell {
         }
         
         self.titleLabel.text = model.title
-        self.yearLabel.text = model.releaseDate.formatToHumanReadableDate(inputFormat: "yyyy-MM-dd", outputStyle: .long)
+        self.yearLabel.text = model.releaseDate.formatToHumanReadableDate(inputFormat: "yyyy-MM-dd", outputFormat: "d MMMM yyyy")
         
     }
     

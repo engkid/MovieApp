@@ -29,6 +29,7 @@ final class MovieDetailCell: UICollectionViewCell {
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.numberOfLines = 0
         descriptionLabel.lineBreakMode = .byWordWrapping
+        descriptionLabel.font = UIFont.systemFont(ofSize: 14)
         return descriptionLabel
     }()
     
@@ -45,6 +46,26 @@ final class MovieDetailCell: UICollectionViewCell {
         if let posterPath = model.posterPath, let url = URL(string: "\(AppConstants.imagePath)\(posterPath)") {
             self.movieBannerImage.loadImage(from: url)
         }
+        
+        self.movieRatingLabel.attributedText = makeRatingText(model: model)
+        self.descriptionLabel.text = model.overview
+    }
+    
+    private func makeRatingText(model: Movie) -> NSMutableAttributedString {
+        let boldAttributes: [NSAttributedString.Key: Any] = [
+                .font: UIFont.boldSystemFont(ofSize: 16)
+            ]
+        let voteAverageText = NSAttributedString(string: "\(model.voteAverage)", attributes: boldAttributes)
+        let voteCountText = NSAttributedString(string: "\(model.voteCount)", attributes: boldAttributes)
+        
+        let ratingText = NSMutableAttributedString()
+        ratingText.append(NSAttributedString(string: "Average rating: "))
+        ratingText.append(voteAverageText)
+        ratingText.append(NSAttributedString(string: " out of "))
+        ratingText.append(voteCountText)
+        ratingText.append(NSAttributedString(string: " votes"))
+        
+        return ratingText
     }
     
     private func setupViews() {
@@ -53,10 +74,16 @@ final class MovieDetailCell: UICollectionViewCell {
         contentView.addSubview(descriptionLabel)
         
         NSLayoutConstraint.activate([
-            self.movieBannerImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8.0),
+            self.movieBannerImage.topAnchor.constraint(equalTo: contentView.topAnchor),
             self.movieBannerImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8.0),
             self.movieBannerImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8.0),
-            self.movieBannerImage.heightAnchor.constraint(equalToConstant: 450)
+            self.movieBannerImage.heightAnchor.constraint(equalToConstant: 450),
+            self.movieBannerImage.bottomAnchor.constraint(equalTo: movieRatingLabel.topAnchor, constant: -8.0),
+            self.movieRatingLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8.0),
+            self.movieRatingLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8.0),
+            self.movieRatingLabel.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: -8.0),
+            self.descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8.0),
+            self.descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8.0)
         ])
     }
     

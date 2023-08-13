@@ -10,7 +10,7 @@ import Foundation
 enum NetworkError: Error {
     case invalidURL
     case requestFailed(statusCode: Int)
-    case decodingError
+    case decodingError(_ error: Error)
     case encodingError
 }
 
@@ -56,8 +56,8 @@ class NetworkService {
             do {
                 let payloadData = try JSONSerialization.data(withJSONObject: payload as Any)
                 request.httpBody = payloadData
-            } catch {
-                throw NetworkError.decodingError
+            } catch let error {
+                throw NetworkError.decodingError(error)
             }
         }
         
@@ -69,8 +69,9 @@ class NetworkService {
             do {
                 let decodedData = try decoder.decode(T.self, from: data)
                 return decodedData
-            } catch {
-                throw NetworkError.decodingError
+            } catch let error {
+                print(error)
+                throw NetworkError.decodingError(error)
             }
         } else {
             throw NetworkError.requestFailed(statusCode: (response as? HTTPURLResponse)?.statusCode ?? 0)

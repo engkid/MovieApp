@@ -11,7 +11,7 @@ enum MovieListNavigationOption {
     case movieDetails(Movie)
 }
 
-struct Movie: Codable, Hashable {
+struct Movie: Codable, Hashable, Equatable {
     var identifier: String = UUID().uuidString
     let adult: Bool
     let backdropPath: String?
@@ -51,27 +51,6 @@ struct Movie: Codable, Hashable {
     
     static func == (lhs: Movie, rhs: Movie) -> Bool {
         return lhs.id == rhs.id
-    }
-}
-
-enum MovieListEndpoint {
-    case movieList
-}
-
-extension MovieListEndpoint: MovieAPISetup {
-    
-    var urlEndpoint: URL? {
-        switch self {
-        case .movieList:
-            return URL(string: "\(AppConstants.basePath)\(endpoint)")
-        }
-    }
-    
-    private var endpoint: String {
-        switch self {
-        case .movieList:
-            return "/discover/movie"
-        }
     }
 }
 

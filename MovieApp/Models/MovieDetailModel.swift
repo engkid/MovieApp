@@ -16,7 +16,21 @@ enum MovieDetailSection: Int, CaseIterable, Hashable {
 enum MovieDetailCellType: Hashable {
     case movieDetail(Movie)
     case movieTrailer
-    case userReviews
+    case userReviews(UserReview)
+    
+    static func ==(lhs: MovieDetailCellType, rhs: MovieDetailCellType) -> Bool {
+        switch (lhs, rhs) {
+        case let (.movieDetail(movie1), .movieDetail(movie2)):
+            return movie1 == movie2
+        case (.movieTrailer, .movieTrailer):
+            return true
+        case let (.userReviews(review1), .userReviews(review2)):
+            return review1 == review2
+        default:
+            return false
+        }
+    }
+    
 }
 
 struct MovieDetailItem: Hashable {

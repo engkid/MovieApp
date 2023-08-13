@@ -15,8 +15,12 @@ final class MovieDetailInteractor {
     // MARK: - Public properties
     let movie: Movie
     
-    init(movie: Movie) {
+    // MARK: - Private properties
+    private let service: NetworkService
+    
+    init(movie: Movie, service: NetworkService = NetworkService.shared) {
         self.movie = movie
+        self.service = service
     }
     
 }
@@ -24,5 +28,10 @@ final class MovieDetailInteractor {
 // MARK: - Extensions -
 
 extension MovieDetailInteractor: MovieDetailInteractorInterface {
-    
+    func getMovieReviews(id: String) async throws -> TMDBApiResult<UserReview>? {
+        if let url = MovieDetailEndpoint.userReview(id).urlEndpoint {
+            return try await self.service.performRequest(url: url)
+        }
+        return nil
+    }
 }
