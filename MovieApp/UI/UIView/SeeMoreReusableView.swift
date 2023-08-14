@@ -36,7 +36,7 @@ final class SeeMoreReusableView: UICollectionReusableView {
     }
     
     func disableSeeMoreButton() {
-        seeMoreButton.setTitle("Preview unavailable", for: .normal)
+        seeMoreButton.setTitle("Review unavailable", for: .normal)
         seeMoreButton.backgroundColor = .systemGray
         seeMoreButton.isEnabled = false
     }
