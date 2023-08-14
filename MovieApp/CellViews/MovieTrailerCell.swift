@@ -2,7 +2,7 @@
 //  MovieTrailerCell.swift
 //  MovieApp
 //
-//  Created by Engkit on 13/08/23.
+//  Created by k1d_dev on 13/08/23.
 //
 
 import UIKit

@@ -28,6 +28,8 @@ final class MovieListViewController: UIViewController {
         return collectionView
     }()
 
+    private var isLoadingMore = false
+    private var hasLoadedInitialData = false
     private var dataSource: UICollectionViewDiffableDataSource<MovieListSection, MovieListItem>!
     
     // MARK: - Lifecycle -
@@ -47,6 +49,7 @@ final class MovieListViewController: UIViewController {
     private func setupViews(insets: UIEdgeInsets = .zero) {
         
         collectionView.registerCellWithoutNib(MovieListCell.self)
+        collectionView.registerFooterWithoutNib(LoadingFooterReusableView.self)
         
         NSLayoutConstraint.activate([
             self.collectionView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: insets.top),
@@ -88,6 +91,16 @@ final class MovieListViewController: UIViewController {
                     bottom: 20,
                     trailing: 16
                 )
+                
+                let footerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
+                let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(
+                    layoutSize: footerSize,
+                    elementKind: UICollectionView.elementKindSectionFooter,
+                    alignment: .bottom
+                )
+                
+                section.boundarySupplementaryItems = [sectionFooter]
+                
                 return section
             case .none:
                 let item = NSCollectionLayoutItem(
@@ -122,6 +135,19 @@ final class MovieListViewController: UIViewController {
                 return cell
             }
         }
+        
+        dataSource.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
+            guard let self = self else { return nil }
+            switch kind {
+            case UICollectionView.elementKindSectionFooter:
+                let footerView: LoadingFooterReusableView = collectionView.dequeueFooter(LoadingFooterReusableView.self, indexPath: indexPath)
+                footerView.configure(isLoading: self.isLoadingMore)
+                return footerView
+            default:
+                return nil
+            }
+        }
+        
     }
     
 }
@@ -131,12 +157,18 @@ final class MovieListViewController: UIViewController {
 extension MovieListViewController: MovieListViewInterface {
     
     func applySnapshot(item: [MovieListItem]) {
-        var snapshot = NSDiffableDataSourceSnapshot<MovieListSection, MovieListItem>()
+        var snapshot = dataSource.snapshot()
         
-        snapshot.appendSections([.movieList])
+        if !hasLoadedInitialData {
+            snapshot.appendSections([.movieList])
+            hasLoadedInitialData = true
+        }
+        
         snapshot.appendItems(item)
         
         dataSource.apply(snapshot, animatingDifferences: true)
+        
+        isLoadingMore = false
     }
     
 }
@@ -147,6 +179,18 @@ extension MovieListViewController: UICollectionViewDelegate {
         let selectedItem = dataSource.itemIdentifier(for: indexPath)
         if case let .movieList(movie) = selectedItem?.type {
             presenter.navigate(to: .movieDetails(movie), navigationController: self.navigationController)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let itemsSection = dataSource.snapshot().itemIdentifiers(inSection: .movieList).count
+        
+        if indexPath.row == itemsSection - 1 && !isLoadingMore {
+            isLoadingMore = true
+            presenter.page += 1
+            Task {
+                try await presenter.discoverMovie()
+            }
         }
     }
     

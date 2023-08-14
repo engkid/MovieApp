@@ -28,9 +28,9 @@ final class MovieListInteractor {
 
 extension MovieListInteractor: MovieListInteractorInterface {
     
-    func discoverMovie(by id: String) async throws -> TMDBApiResult<Movie>? {
+    func discoverMovie(by id: String, page: String) async throws -> TMDBApiResult<Movie>? {
         if let url = MovieListEndpoint.movieList.urlEndpoint {
-            return try await self.service.performRequest(url: url, payload: ["with_genres": id])
+            return try await self.service.performRequest(url: url, payload: ["with_genres": id, "page": page])
         }
         return nil
     }

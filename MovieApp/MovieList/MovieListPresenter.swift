@@ -13,6 +13,7 @@ import UIKit
 
 final class MovieListPresenter {
 
+    var page: Int = 1
     // MARK: - Private properties -
 
     private weak var view: MovieListViewInterface?
@@ -39,7 +40,7 @@ extension MovieListPresenter: MovieListPresenterInterface {
     func discoverMovie() async throws {
         
         Task {
-            let movieListResult: TMDBApiResult<Movie>? = try? await interactor.discoverMovie(by: interactor.movieId)
+            let movieListResult: TMDBApiResult<Movie>? = try? await interactor.discoverMovie(by: interactor.movieId, page: "\(page)")
             
             if let movies = movieListResult?.results as? [Movie] {
                 let movieListItem = movies.map { movie in

@@ -19,11 +19,13 @@ protocol MovieListViewInterface: ViewInterface {
 }
 
 protocol MovieListPresenterInterface: PresenterInterface {
+    var page: Int { get set }
+    
     func discoverMovie() async throws
     func navigate(to destination: MovieListNavigationOption, navigationController: UINavigationController?)
 }
 
 protocol MovieListInteractorInterface: InteractorInterface {
     var movieId: String { get }
-    func discoverMovie(by id: String) async throws -> TMDBApiResult<Movie>?
+    func discoverMovie(by id: String, page: String) async throws -> TMDBApiResult<Movie>?
 }

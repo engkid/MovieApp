@@ -2,7 +2,7 @@
 //  UserReviewCell.swift
 //  MovieApp
 //
-//  Created by Engkit on 13/08/23.
+//  Created by k1d_dev on 13/08/23.
 //
 
 import UIKit
@@ -76,7 +76,6 @@ final class UserReviewCell: UICollectionViewCell {
         contentView.addSubview(reviewLabel)
         contentView.addSubview(separatorView)
         
-        // Create constraints for the horizontal stack view
         NSLayoutConstraint.activate([
             horizontalStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8.0),
             horizontalStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8.0),

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1E6277802A89490A0085AE04 /* MovieTrailerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E62777F2A89490A0085AE04 /* MovieTrailerModel.swift */; };
 		1E6277822A8949170085AE04 /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6277812A8949170085AE04 /* MovieModel.swift */; };
+		1E6277862A89DA3F0085AE04 /* LoadingFooterReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6277852A89DA3F0085AE04 /* LoadingFooterReusableView.swift */; };
 		1EBAA9362A8781B3006E6C11 /* MovieAPIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBAA9352A8781B3006E6C11 /* MovieAPIProtocol.swift */; };
 		1EBAA9382A87850C006E6C11 /* MovieListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBAA9372A87850C006E6C11 /* MovieListCell.swift */; };
 		1EBAA93A2A87C316006E6C11 /* UIImageView+exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBAA9392A87C316006E6C11 /* UIImageView+exts.swift */; };
@@ -80,6 +81,7 @@
 /* Begin PBXFileReference section */
 		1E62777F2A89490A0085AE04 /* MovieTrailerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTrailerModel.swift; sourceTree = "<group>"; };
 		1E6277812A8949170085AE04 /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
+		1E6277852A89DA3F0085AE04 /* LoadingFooterReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingFooterReusableView.swift; sourceTree = "<group>"; };
 		1EBAA9352A8781B3006E6C11 /* MovieAPIProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAPIProtocol.swift; sourceTree = "<group>"; };
 		1EBAA9372A87850C006E6C11 /* MovieListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListCell.swift; sourceTree = "<group>"; };
 		1EBAA9392A87C316006E6C11 /* UIImageView+exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+exts.swift"; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				1EBAA9602A890D91006E6C11 /* SectionTitleReusableView.swift */,
+				1E6277852A89DA3F0085AE04 /* LoadingFooterReusableView.swift */,
 			);
 			path = UIView;
 			sourceTree = "<group>";
@@ -485,6 +488,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1EBAA9612A890D91006E6C11 /* SectionTitleReusableView.swift in Sources */,
+				1E6277862A89DA3F0085AE04 /* LoadingFooterReusableView.swift in Sources */,
 				1EDE90B82A85CEC5000C821F /* FormatterInterface.swift in Sources */,
 				1EC9CC9A2A869BC300B337CE /* MovieListInteractor.swift in Sources */,
 				1EBAA94B2A88491C006E6C11 /* GradientView.swift in Sources */,
