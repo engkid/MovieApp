@@ -82,20 +82,26 @@ final class MovieDetailCell: UICollectionViewCell {
         contentView.addSubview(movieRatingLabel)
         contentView.addSubview(descriptionLabel)
         
+        
         NSLayoutConstraint.activate([
             self.movieBannerImage.topAnchor.constraint(equalTo: contentView.topAnchor),
             self.movieBannerImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8.0),
             self.movieBannerImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8.0),
             self.movieBannerImage.heightAnchor.constraint(equalToConstant: 450),
             self.movieBannerImage.bottomAnchor.constraint(equalTo: movieRatingLabel.topAnchor, constant: -8.0),
+            self.synopsisLabel.topAnchor.constraint(equalTo: movieRatingLabel.bottomAnchor, constant: 8.0),
             self.synopsisLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8.0),
             self.synopsisLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8.0),
             self.synopsisLabel.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: -8.0),
+            self.synopsisLabel.heightAnchor.constraint(equalToConstant: 23),
+            self.movieRatingLabel.heightAnchor.constraint(equalToConstant: 20),
             self.movieRatingLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8.0),
             self.movieRatingLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8.0),
             self.movieRatingLabel.bottomAnchor.constraint(equalTo: synopsisLabel.topAnchor, constant: -8.0),
+            self.descriptionLabel.topAnchor.constraint(equalTo: synopsisLabel.bottomAnchor, constant: -8.0),
             self.descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8.0),
-            self.descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8.0)
+            self.descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8.0),
+            bottomAnchor.constraint(equalTo: self.descriptionLabel.bottomAnchor, constant: 8.0)
         ])
     }
     

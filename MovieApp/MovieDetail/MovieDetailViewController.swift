@@ -52,6 +52,7 @@ final class MovieDetailViewController: UIViewController {
         collectionView.registerCellWithoutNib(MovieTrailerCell.self)
         collectionView.registerCellWithoutNib(UserReviewCell.self)
         collectionView.registerHeaderWithoutNib(SectionTitleReusableView.self)
+        collectionView.registerFooterWithoutNib(SeeMoreReusableView.self)
         
         NSLayoutConstraint.activate([
             self.collectionView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: insets.top),
@@ -142,7 +143,7 @@ final class MovieDetailViewController: UIViewController {
                 
                 let section = NSCollectionLayoutSection(group: group)
                 section.contentInsets = .init(
-                    top: 0,
+                    top: 16,
                     leading: 16,
                     bottom: 0,
                     trailing: 16
@@ -155,7 +156,14 @@ final class MovieDetailViewController: UIViewController {
                     alignment: .top
                 )
                 
-                section.boundarySupplementaryItems = [sectionHeader]
+                let footerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
+                let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(
+                    layoutSize: footerSize,
+                    elementKind: UICollectionView.elementKindSectionFooter,
+                    alignment: .bottom
+                )
+                
+                section.boundarySupplementaryItems = [sectionHeader, sectionFooter]
                 
                 return section
             case .none:
@@ -199,7 +207,13 @@ final class MovieDetailViewController: UIViewController {
             case .userReviews(let userReview):
                 let cell = collectionView.dequeueReusableCell(withClass: UserReviewCell.self, for: indexPath)
                 
-                cell.configure(review: userReview)
+                cell.configure(cellType: .regular(review: userReview))
+                
+                return cell
+            case .emptyUserReview:
+                let cell = collectionView.dequeueReusableCell(withClass: UserReviewCell.self, for: indexPath)
+                
+                cell.configure(cellType: .emptyState)
                 
                 return cell
             }
@@ -225,9 +239,21 @@ final class MovieDetailViewController: UIViewController {
                 default:
                     return nil
                 }
+            
+            case UICollectionView.elementKindSectionFooter:
+                
+                if section == .userReview {
+                    let footerView: SeeMoreReusableView = collectionView.dequeueFooter(SeeMoreReusableView.self, indexPath: indexPath)
+                    footerView.seeMoreButtonTapped = {
+                        // TODO: - Add button action handler here -
+                    }
+                    return footerView
+                }
+                
             default:
                 return nil
             }
+            return nil
         }
         
     }
@@ -251,6 +277,8 @@ extension MovieDetailViewController: MovieDetailViewInterface {
                 snapshot.appendItems([.init(section: .userReview, type: .userReviews(review))], toSection: .userReview)
             case .movieTrailer(let movieId):
                 snapshot.appendItems([.init(section: .movieTrailer, type: .movieTrailer(movieId))], toSection: .movieTrailer)
+            case .emptyUserReview:
+                snapshot.appendItems([.init(section: .userReview, type: .emptyUserReview)], toSection: .userReview)
             }
         }
         

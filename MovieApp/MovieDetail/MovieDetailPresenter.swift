@@ -62,8 +62,16 @@ extension MovieDetailPresenter: MovieDetailPresenterInterface {
         
         if let reviews = await reviewResults?.results as? [UserReview] {
             
-            let reviewItems = reviews.map { MovieDetailItem(section: .userReview, type: .userReviews($0)) }
-            reviewDetailItem.append(contentsOf: reviewItems)
+            
+            
+            if reviews.isEmpty {
+                let reviewItem = MovieDetailItem(section: .userReview, type: .emptyUserReview)
+                reviewDetailItem.append(contentsOf: [reviewItem])
+                
+            } else {
+                let reviewItems = reviews.map { MovieDetailItem(section: .userReview, type: .userReviews($0)) }
+                reviewDetailItem.append(contentsOf: reviewItems)
+            }
             
         }
         

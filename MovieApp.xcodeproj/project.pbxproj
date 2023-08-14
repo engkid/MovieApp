@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E1469D52A8A366D00B8EEC3 /* UIViewController+exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1469D42A8A366D00B8EEC3 /* UIViewController+exts.swift */; };
+		1E1469D72A8A390400B8EEC3 /* ThreadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1469D62A8A390400B8EEC3 /* ThreadManager.swift */; };
+		1E1469D92A8A3DEC00B8EEC3 /* SeeMoreReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1469D82A8A3DEC00B8EEC3 /* SeeMoreReusableView.swift */; };
 		1E6277802A89490A0085AE04 /* MovieTrailerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E62777F2A89490A0085AE04 /* MovieTrailerModel.swift */; };
 		1E6277822A8949170085AE04 /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6277812A8949170085AE04 /* MovieModel.swift */; };
 		1E6277862A89DA3F0085AE04 /* LoadingFooterReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6277852A89DA3F0085AE04 /* LoadingFooterReusableView.swift */; };
@@ -79,6 +82,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1E1469D42A8A366D00B8EEC3 /* UIViewController+exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+exts.swift"; sourceTree = "<group>"; };
+		1E1469D62A8A390400B8EEC3 /* ThreadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadManager.swift; sourceTree = "<group>"; };
+		1E1469D82A8A3DEC00B8EEC3 /* SeeMoreReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeMoreReusableView.swift; sourceTree = "<group>"; };
 		1E62777F2A89490A0085AE04 /* MovieTrailerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTrailerModel.swift; sourceTree = "<group>"; };
 		1E6277812A8949170085AE04 /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
 		1E6277852A89DA3F0085AE04 /* LoadingFooterReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingFooterReusableView.swift; sourceTree = "<group>"; };
@@ -168,6 +174,7 @@
 				1EDE90C42A866707000C821F /* UICollectionView+exts.swift */,
 				1EBAA9392A87C316006E6C11 /* UIImageView+exts.swift */,
 				1EBAA93B2A87CF75006E6C11 /* String+exts.swift */,
+				1E1469D42A8A366D00B8EEC3 /* UIViewController+exts.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -207,6 +214,7 @@
 			children = (
 				1EBAA9602A890D91006E6C11 /* SectionTitleReusableView.swift */,
 				1E6277852A89DA3F0085AE04 /* LoadingFooterReusableView.swift */,
+				1E1469D82A8A3DEC00B8EEC3 /* SeeMoreReusableView.swift */,
 			);
 			path = UIView;
 			sourceTree = "<group>";
@@ -336,6 +344,7 @@
 			children = (
 				1EBAA95F2A890D82006E6C11 /* UIView */,
 				1EDE90C92A868A11000C821F /* AppConstants.swift */,
+				1E1469D62A8A390400B8EEC3 /* ThreadManager.swift */,
 				1EDE90AE2A85CEB7000C821F /* VIPERBase */,
 				1EBAA93D2A87D6B0006E6C11 /* Extensions */,
 				1EDE90C62A867D84000C821F /* NetworkService */,
@@ -488,9 +497,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				1EBAA9612A890D91006E6C11 /* SectionTitleReusableView.swift in Sources */,
+				1E1469D72A8A390400B8EEC3 /* ThreadManager.swift in Sources */,
 				1E6277862A89DA3F0085AE04 /* LoadingFooterReusableView.swift in Sources */,
 				1EDE90B82A85CEC5000C821F /* FormatterInterface.swift in Sources */,
 				1EC9CC9A2A869BC300B337CE /* MovieListInteractor.swift in Sources */,
+				1E1469D52A8A366D00B8EEC3 /* UIViewController+exts.swift in Sources */,
 				1EBAA94B2A88491C006E6C11 /* GradientView.swift in Sources */,
 				1EBAA9452A87DBD2006E6C11 /* MovieDetailPresenter.swift in Sources */,
 				1EBAA93A2A87C316006E6C11 /* UIImageView+exts.swift in Sources */,
@@ -511,6 +522,7 @@
 				1EDE90C22A85DC3A000C821F /* AppDelegate.swift in Sources */,
 				1EBAA9572A88B3AB006E6C11 /* UserReviewModel.swift in Sources */,
 				1EDE90B42A85CEC5000C821F /* BaseWireframe.swift in Sources */,
+				1E1469D92A8A3DEC00B8EEC3 /* SeeMoreReusableView.swift in Sources */,
 				1EBAA9462A87DBD2006E6C11 /* MovieDetailViewController.swift in Sources */,
 				1EBAA94F2A886B3B006E6C11 /* MovieDetailCell.swift in Sources */,
 				1EDE90B62A85CEC5000C821F /* PresenterInterface.swift in Sources */,

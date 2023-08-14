@@ -16,6 +16,9 @@ protocol HomeWireframeInterface: WireframeInterface {
 
 protocol HomeViewInterface: ViewInterface {
     func applySnapshot(item: [HomeItem])
+    func showErrorState(message: String)
+    func showLoadingIndicator()
+    func hideLoadingIndicator()
 }
 
 protocol HomePresenterInterface: PresenterInterface {

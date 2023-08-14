@@ -11,9 +11,9 @@
 import UIKit
 
 final class HomeViewController: UIViewController {
-
+    
     // MARK: - Public properties -
-
+    
     var presenter: HomePresenterInterface!
     
     // MARK: - Private properties -
@@ -28,8 +28,14 @@ final class HomeViewController: UIViewController {
         collectionView.backgroundColor = .white
         return collectionView
     }()
-
+    
     private var dataSource: UICollectionViewDiffableDataSource<HomeSection, HomeItem>!
+    private lazy var loadingIndicator: UIActivityIndicatorView = {
+        let loadingIndicator = UIActivityIndicatorView(style: .medium)
+        loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
+        loadingIndicator.hidesWhenStopped = true
+        return loadingIndicator
+    }()
     
     // MARK: - Lifecycle -
 
@@ -37,6 +43,7 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         self.title = "Movie App"
         self.view.addSubview(collectionView)
+        self.view.addSubview(loadingIndicator)
         self.setupViews()
         self.configureDataSource()
         
@@ -53,7 +60,9 @@ final class HomeViewController: UIViewController {
             self.collectionView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: insets.top),
             self.collectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: insets.right),
             self.collectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: insets.left),
-            self.collectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: insets.bottom)
+            self.collectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: insets.bottom),
+            self.loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            self.loadingIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
         
     }
@@ -125,6 +134,14 @@ final class HomeViewController: UIViewController {
             }
         }
     }
+    
+    private func toggleLoadingIndicator(_ isLoading: Bool) {
+        if isLoading {
+            loadingIndicator.startAnimating()
+        } else {
+            loadingIndicator.stopAnimating()
+        }
+    }
 }
 
 // MARK: - Extensions -
@@ -138,6 +155,24 @@ extension HomeViewController: HomeViewInterface {
         snapshot.appendItems(item)
         
         dataSource.apply(snapshot, animatingDifferences: true)
+    }
+    
+    func showErrorState(message: String) {
+        ThreadManager.runOnMainThread {
+            self.showToast(with: message)
+        }
+    }
+    
+    func showLoadingIndicator() {
+        ThreadManager.runOnMainThread {
+            self.toggleLoadingIndicator(true)
+        }
+    }
+    
+    func hideLoadingIndicator() {
+        ThreadManager.runOnMainThread {
+            self.toggleLoadingIndicator(false)
+        }
     }
     
 }
