@@ -42,8 +42,6 @@ final class MovieListViewController: UIViewController {
         Task {
             try await self.presenter.discoverMovie()
         }
-        
-        
     }
     
     private func setupViews(insets: UIEdgeInsets = .zero) {

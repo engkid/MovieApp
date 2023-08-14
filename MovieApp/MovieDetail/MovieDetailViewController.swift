@@ -79,7 +79,7 @@ final class MovieDetailViewController: UIViewController {
                 let group = NSCollectionLayoutGroup.vertical(
                     layoutSize: .init(
                         widthDimension: .fractionalWidth(1),
-                        heightDimension: .estimated(650)
+                        heightDimension: .estimated(670)
                     ),
                     subitems: [item]
                 )
@@ -90,6 +90,7 @@ final class MovieDetailViewController: UIViewController {
                     bottom: 0,
                     trailing: 16
                 )
+                
                 return section
             case .movieTrailer:
                 let item = NSCollectionLayoutItem(
