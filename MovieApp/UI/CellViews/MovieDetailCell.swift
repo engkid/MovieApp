@@ -87,7 +87,7 @@ final class MovieDetailCell: UICollectionViewCell {
             self.movieBannerImage.topAnchor.constraint(equalTo: contentView.topAnchor),
             self.movieBannerImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8.0),
             self.movieBannerImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8.0),
-            self.movieBannerImage.heightAnchor.constraint(equalToConstant: 450),
+            self.movieBannerImage.heightAnchor.constraint(equalToConstant: 470),
             self.movieBannerImage.bottomAnchor.constraint(equalTo: movieRatingLabel.topAnchor, constant: -8.0),
             self.synopsisLabel.topAnchor.constraint(equalTo: movieRatingLabel.bottomAnchor, constant: 8.0),
             self.synopsisLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8.0),

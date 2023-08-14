@@ -9,7 +9,7 @@ import UIKit
 
 enum UserReviewCellType {
     case regular(review: UserReview)
-    case emptyState
+    case emptyState(String)
 }
 
 final class UserReviewCell: UICollectionViewCell {
@@ -75,8 +75,8 @@ final class UserReviewCell: UICollectionViewCell {
             self.createdAtLabel.text = review.createdAt.formatToHumanReadableDate(inputFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", outputFormat: "MMMM dd, yyyy 'at' HH:mm a")
             self.reviewLabel.text = review.content
             self.separatorView.isHidden = false
-        case .emptyState:
-            self.authorLabel.text = "No Reviews Available"
+        case .emptyState(let emptyStateTitle):
+            self.authorLabel.text = emptyStateTitle
             self.createdAtLabel.text = ""
             self.reviewLabel.text = ""
             self.separatorView.isHidden = true

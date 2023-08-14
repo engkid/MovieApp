@@ -209,10 +209,10 @@ final class MovieDetailViewController: UIViewController {
                 cell.configure(cellType: .regular(review: userReview))
                 
                 return cell
-            case .emptyUserReview:
+            case .emptyUserReview(let emptyTitle):
                 let cell = collectionView.dequeueReusableCell(withClass: UserReviewCell.self, for: indexPath)
                 
-                cell.configure(cellType: .emptyState)
+                cell.configure(cellType: .emptyState(emptyTitle))
                 
                 return cell
             }
@@ -241,12 +241,30 @@ final class MovieDetailViewController: UIViewController {
             
             case UICollectionView.elementKindSectionFooter:
                 
+                let userReviews: [MovieDetailItem] = self.dataSource.snapshot().itemIdentifiers(inSection: .userReview)
+                
                 if section == .userReview {
-                    let footerView: SeeMoreReusableView = collectionView.dequeueFooter(SeeMoreReusableView.self, indexPath: indexPath)
-                    footerView.seeMoreButtonTapped = {
-                        self.presenter.navigate(to: .userReviewDetail, navigationController: self.navigationController)
+                    
+                    if let type: MovieDetailCellType = userReviews.first?.type {
+                        
+                        switch type {
+                        case .emptyUserReview:
+                            let footerView: SeeMoreReusableView = collectionView.dequeueFooter(SeeMoreReusableView.self, indexPath: indexPath)
+                            
+                            footerView.disableSeeMoreButton()
+                            
+                            return footerView
+                        case .userReviews:
+                            let footerView: SeeMoreReusableView = collectionView.dequeueFooter(SeeMoreReusableView.self, indexPath: indexPath)
+                            
+                            footerView.seeMoreButtonTapped = {
+                                self.presenter.navigate(to: .userReviewDetail, navigationController: self.navigationController)
+                            }
+                            
+                            return footerView
+                        default: return nil
+                        }
                     }
-                    return footerView
                 }
                 
             default:
@@ -276,8 +294,8 @@ extension MovieDetailViewController: MovieDetailViewInterface {
                 snapshot.appendItems([.init(section: .userReview, type: .userReviews(review))], toSection: .userReview)
             case .movieTrailer(let movieId):
                 snapshot.appendItems([.init(section: .movieTrailer, type: .movieTrailer(movieId))], toSection: .movieTrailer)
-            case .emptyUserReview:
-                snapshot.appendItems([.init(section: .userReview, type: .emptyUserReview)], toSection: .userReview)
+            case .emptyUserReview(let emptyTitle):
+                snapshot.appendItems([.init(section: .userReview, type: .emptyUserReview(emptyTitle))], toSection: .userReview)
             }
         }
         

@@ -65,7 +65,7 @@ extension MovieDetailPresenter: MovieDetailPresenterInterface {
         
         if let reviews = await reviewResults?.results as? [UserReview] {
             if reviews.isEmpty {
-                let reviewItem = MovieDetailItem(section: .userReview, type: .emptyUserReview)
+                let reviewItem = MovieDetailItem(section: .userReview, type: .emptyUserReview("No Review Available"))
                 reviewDetailItem.append(contentsOf: [reviewItem])
                 
             } else {

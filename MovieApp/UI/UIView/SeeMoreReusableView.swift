@@ -35,6 +35,12 @@ final class SeeMoreReusableView: UICollectionReusableView {
         seeMoreButtonTapped?()
     }
     
+    func disableSeeMoreButton() {
+        seeMoreButton.setTitle("Preview unavailable", for: .normal)
+        seeMoreButton.backgroundColor = .systemGray
+        seeMoreButton.isEnabled = false
+    }
+    
     private func setupViews() {
         addSubview(seeMoreButton)
         
