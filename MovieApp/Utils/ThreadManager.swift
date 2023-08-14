@@ -2,7 +2,7 @@
 //  ThreadManager.swift
 //  MovieApp
 //
-//  Created by Engkit on 14/08/23.
+//  Created by k1d_dev on 14/08/23.
 //
 
 import Foundation

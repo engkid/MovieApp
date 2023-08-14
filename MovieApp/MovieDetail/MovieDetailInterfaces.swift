@@ -11,6 +11,7 @@
 import UIKit
 
 protocol MovieDetailWireframeInterface: WireframeInterface {
+    func navigate(to destination: MovieDetailsNavigationOption, navigationController: UINavigationController?)
 }
 
 protocol MovieDetailViewInterface: ViewInterface {
@@ -21,6 +22,7 @@ protocol MovieDetailPresenterInterface: PresenterInterface {
     var title: String { get set }
     
     func viewDidLoad() async throws
+    func navigate(to destination: MovieDetailsNavigationOption, navigationController: UINavigationController?)
 }
 
 protocol MovieDetailInteractorInterface: InteractorInterface {

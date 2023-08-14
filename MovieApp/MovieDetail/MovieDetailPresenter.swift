@@ -9,9 +9,12 @@
 //
 
 import Foundation
+import UIKit
 
 final class MovieDetailPresenter {
 
+    var movieId: String?
+    
     // MARK: - Private properties -
 
     private weak var view: MovieDetailViewInterface?
@@ -61,9 +64,6 @@ extension MovieDetailPresenter: MovieDetailPresenterInterface {
         async let trailerResults = try? await interactor.getMovieTrailers(id: "\(interactor.movie.id)")
         
         if let reviews = await reviewResults?.results as? [UserReview] {
-            
-            
-            
             if reviews.isEmpty {
                 let reviewItem = MovieDetailItem(section: .userReview, type: .emptyUserReview)
                 reviewDetailItem.append(contentsOf: [reviewItem])
@@ -83,6 +83,10 @@ extension MovieDetailPresenter: MovieDetailPresenterInterface {
         }
         
         view?.applySnapshot(items: reviewDetailItem)
+    }
+    
+    func navigate(to destination: MovieDetailsNavigationOption, navigationController: UINavigationController?) {
+        self.wireframe.navigate(to: destination, navigationController: navigationController)
     }
     
 }

@@ -25,7 +25,7 @@ final class UserReviewCell: UICollectionViewCell {
     private let reviewLabel: UILabel = {
         let reviewLabel = UILabel()
         reviewLabel.translatesAutoresizingMaskIntoConstraints = false
-        reviewLabel.numberOfLines = 4
+        reviewLabel.numberOfLines = 0
         return reviewLabel
     }()
     

@@ -23,7 +23,6 @@ final class MovieDetailViewController: UIViewController {
             collectionViewLayout: self.createLayout()
         )
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-//        collectionView.delegate = self
         collectionView.backgroundColor = .white
         return collectionView
     }()
@@ -130,7 +129,7 @@ final class MovieDetailViewController: UIViewController {
                 let item = NSCollectionLayoutItem(
                     layoutSize: .init(
                         widthDimension: .fractionalWidth(1),
-                        heightDimension: .estimated(135)
+                        heightDimension: .absolute(135)
                     )
                 )
                 let group = NSCollectionLayoutGroup.vertical(
@@ -219,8 +218,8 @@ final class MovieDetailViewController: UIViewController {
             }
         }
         
-        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
-            guard let section = MovieDetailSection(rawValue: indexPath.section) else {
+        dataSource.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
+            guard let self = self, let section = MovieDetailSection(rawValue: indexPath.section) else {
                 return nil
             }
             
@@ -245,7 +244,7 @@ final class MovieDetailViewController: UIViewController {
                 if section == .userReview {
                     let footerView: SeeMoreReusableView = collectionView.dequeueFooter(SeeMoreReusableView.self, indexPath: indexPath)
                     footerView.seeMoreButtonTapped = {
-                        // TODO: - Add button action handler here -
+                        self.presenter.navigate(to: .userReviewDetail, navigationController: self.navigationController)
                     }
                     return footerView
                 }

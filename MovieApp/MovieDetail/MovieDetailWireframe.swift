@@ -13,9 +13,11 @@ import UIKit
 final class MovieDetailWireframe: BaseWireframe<MovieDetailViewController> {
 
     // MARK: - Module setup -
+    private let movie: Movie
 
     init(movie: Movie) {
         let moduleViewController = MovieDetailViewController()
+        self.movie = movie
         super.init(viewController: moduleViewController)
 
         let interactor = MovieDetailInteractor(movie: movie)
@@ -27,8 +29,17 @@ final class MovieDetailWireframe: BaseWireframe<MovieDetailViewController> {
 
 // MARK: - Extensions -
 
+enum MovieDetailsNavigationOption {
+    case userReviewDetail
+}
+
 extension MovieDetailWireframe: MovieDetailWireframeInterface {
-    
-    
-    
+    func navigate(to destination: MovieDetailsNavigationOption, navigationController: UINavigationController?) {
+        switch destination {
+        case .userReviewDetail:
+            if let navigationController = navigationController {
+                navigationController.pushWireframe(UserReviewsWireframe(movieId: "\(movie.id)"))
+            }
+        }
+    }
 }
