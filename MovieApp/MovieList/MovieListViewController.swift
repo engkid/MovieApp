@@ -171,6 +171,12 @@ extension MovieListViewController: MovieListViewInterface {
         isLoadingMore = false
     }
     
+    func showErrorState(message: String) {
+        ThreadManager.runOnMainThread {
+            self.showToast(with: message)
+        }
+    }
+    
 }
 
 extension MovieListViewController: UICollectionViewDelegate {

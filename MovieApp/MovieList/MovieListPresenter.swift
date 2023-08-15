@@ -48,6 +48,8 @@ extension MovieListPresenter: MovieListPresenterInterface {
                 }
                 
                 view?.applySnapshot(item: movieListItem)
+            } else {
+                view?.showErrorState(message: "Fetch movies failed")
             }
             
         }

@@ -16,6 +16,7 @@ protocol MovieListWireframeInterface: WireframeInterface {
 
 protocol MovieListViewInterface: ViewInterface {
     func applySnapshot(item: [MovieListItem])
+    func showErrorState(message: String)
 }
 
 protocol MovieListPresenterInterface: PresenterInterface {
