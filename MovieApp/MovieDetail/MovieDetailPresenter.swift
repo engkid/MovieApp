@@ -79,7 +79,9 @@ extension MovieDetailPresenter: MovieDetailPresenterInterface {
             let randomIndex = Int.random(in: 0..<trailers.count)
             let randomTrailerKey = trailers[randomIndex].key
             
-            reviewDetailItem.append(MovieDetailItem(section: .movieTrailer, type: .movieTrailer(randomTrailerKey)))
+            reviewDetailItem.append(.init(section: .movieTrailer, type: .movieTrailer(randomTrailerKey)))
+        } else {
+            reviewDetailItem.append(.init(section: .movieTrailer, type: .emptyMovieTrailer("No Trailer Available")))
         }
         
         view?.applySnapshot(items: reviewDetailItem)

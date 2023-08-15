@@ -16,6 +16,7 @@ enum MovieDetailSection: Int, CaseIterable, Hashable {
 enum MovieDetailCellType: Hashable {
     case movieDetail(Movie)
     case movieTrailer(String)
+    case emptyMovieTrailer(String)
     case userReviews(UserReview)
     case emptyUserReview(String)
     

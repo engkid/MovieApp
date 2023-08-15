@@ -96,7 +96,7 @@ final class MovieDetailViewController: UIViewController {
                 let item = NSCollectionLayoutItem(
                     layoutSize: .init(
                         widthDimension: .fractionalWidth(1),
-                        heightDimension: .fractionalWidth(1)
+                        heightDimension: .estimated(270)
                     )
                 )
                 let group = NSCollectionLayoutGroup.vertical(
@@ -203,6 +203,12 @@ final class MovieDetailViewController: UIViewController {
                 cell.configure(movieId)
                 
                 return cell
+            case .emptyMovieTrailer(let emptyTrailerTitle):
+                let cell = collectionView.dequeueReusableCell(withClass: UserReviewCell.self, for: indexPath)
+                
+                cell.configure(cellType: .emptyState(emptyTrailerTitle))
+                
+                return cell
             case .userReviews(let userReview):
                 let cell = collectionView.dequeueReusableCell(withClass: UserReviewCell.self, for: indexPath)
                 
@@ -292,6 +298,8 @@ extension MovieDetailViewController: MovieDetailViewInterface {
                 snapshot.appendItems([.init(section: .moviedetail, type: .movieDetail(movie))], toSection: .moviedetail)
             case .userReviews(let review):
                 snapshot.appendItems([.init(section: .userReview, type: .userReviews(review))], toSection: .userReview)
+            case .emptyMovieTrailer(let emptyTrailerTitle):
+                snapshot.appendItems([.init(section: .movieTrailer, type: .emptyMovieTrailer(emptyTrailerTitle))], toSection: .movieTrailer)
             case .movieTrailer(let movieId):
                 snapshot.appendItems([.init(section: .movieTrailer, type: .movieTrailer(movieId))], toSection: .movieTrailer)
             case .emptyUserReview(let emptyTitle):
