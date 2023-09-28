@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E06A4A12AC5248900FE0555 /* exportOptions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E06A4A02AC5248900FE0555 /* exportOptions.plist */; };
 		1E1469D52A8A366D00B8EEC3 /* UIViewController+exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1469D42A8A366D00B8EEC3 /* UIViewController+exts.swift */; };
 		1E1469D72A8A390400B8EEC3 /* ThreadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1469D62A8A390400B8EEC3 /* ThreadManager.swift */; };
 		1E1469D92A8A3DEC00B8EEC3 /* SeeMoreReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1469D82A8A3DEC00B8EEC3 /* SeeMoreReusableView.swift */; };
@@ -87,6 +88,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1E06A4A02AC5248900FE0555 /* exportOptions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = exportOptions.plist; sourceTree = "<group>"; };
 		1E1469D42A8A366D00B8EEC3 /* UIViewController+exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+exts.swift"; sourceTree = "<group>"; };
 		1E1469D62A8A390400B8EEC3 /* ThreadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadManager.swift; sourceTree = "<group>"; };
 		1E1469D82A8A3DEC00B8EEC3 /* SeeMoreReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeMoreReusableView.swift; sourceTree = "<group>"; };
@@ -357,6 +359,7 @@
 				1EDE90A42A85CE40000C821F /* HomeInterfaces.swift */,
 				1EDE90A52A85CE40000C821F /* HomePresenter.swift */,
 				1EDE90A62A85CE40000C821F /* HomeViewController.swift */,
+				1E06A4A02AC5248900FE0555 /* exportOptions.plist */,
 				1EDE90A72A85CE40000C821F /* HomeInteractor.swift */,
 				1EDE90A82A85CE40000C821F /* HomeWireframe.swift */,
 			);
@@ -526,6 +529,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1EBBF9BF2A85CC27000891DE /* LaunchScreen.storyboard in Resources */,
+				1E06A4A12AC5248900FE0555 /* exportOptions.plist in Resources */,
 				1EBBF9BC2A85CC27000891DE /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
