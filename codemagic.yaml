@@ -8,7 +8,7 @@ workflows:
     scripts:
     - name: Archive iOS app
       script: |
-        xcodebuild -workspace MovieApp.xcodeproj -scheme MovieApp -configuration Release -archivePath build/MovieApp.xcarchive archive
+        xcodebuild -project MovieApp.xcodeproj -scheme MovieApp -configuration Release -archivePath build/MovieApp.xcarchive archive
     artifacts:
     - build/**/*.ipa
     publishing:
