@@ -1,0 +1,19 @@
+ios-workflow:
+  name: iOS Workflow
+  instance_type: mac_mini_m1
+  max_build_duration: 30
+  integratios:
+    app_store_connect: codemagic
+  environment:
+    xcode: latest
+  scripts:
+    name: Archive and Export IPA
+        script: |
+          xcodebuild -workspace MovieApp.xcworkspace -scheme MovieApp -configuration Release -archivePath build/MovieApp.xcarchive archive
+          xcodebuild -exportArchive -archivePath build/MovieApp.xcarchive -exportPath build -exportOptionsPlist exportOptions.plist
+  artifacts:
+   - build/**/*.ipa
+  publishing:
+      email:
+        recipients:
+          - engkidsr@gmail.com
