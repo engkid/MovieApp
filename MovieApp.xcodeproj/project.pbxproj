@@ -62,12 +62,11 @@
 		1EDE90B72A85CEC5000C821F /* InteractorInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE90B22A85CEC5000C821F /* InteractorInterface.swift */; };
 		1EDE90B82A85CEC5000C821F /* FormatterInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE90B32A85CEC5000C821F /* FormatterInterface.swift */; };
 		1EDE90BB2A85D246000C821F /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE90BA2A85D246000C821F /* HomeModel.swift */; };
-		1EDE90BD2A85D34B000C821F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE90BC2A85D34B000C821F /* SceneDelegate.swift */; };
 		1EDE90C02A85D431000C821F /* GenreListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE90BF2A85D431000C821F /* GenreListCell.swift */; };
-		1EDE90C22A85DC3A000C821F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE90C12A85DC3A000C821F /* AppDelegate.swift */; };
 		1EDE90C52A866707000C821F /* UICollectionView+exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE90C42A866707000C821F /* UICollectionView+exts.swift */; };
 		1EDE90C82A867D8F000C821F /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE90C72A867D8F000C821F /* NetworkService.swift */; };
 		1EDE90CA2A868A11000C821F /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE90C92A868A11000C821F /* AppConstants.swift */; };
+		422865332B7B0629005D98F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422865322B7B0629005D98F8 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,12 +145,11 @@
 		1EDE90B22A85CEC5000C821F /* InteractorInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractorInterface.swift; sourceTree = "<group>"; };
 		1EDE90B32A85CEC5000C821F /* FormatterInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormatterInterface.swift; sourceTree = "<group>"; };
 		1EDE90BA2A85D246000C821F /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
-		1EDE90BC2A85D34B000C821F /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		1EDE90BF2A85D431000C821F /* GenreListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreListCell.swift; sourceTree = "<group>"; };
-		1EDE90C12A85DC3A000C821F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1EDE90C42A866707000C821F /* UICollectionView+exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+exts.swift"; sourceTree = "<group>"; };
 		1EDE90C72A867D8F000C821F /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		1EDE90C92A868A11000C821F /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		422865322B7B0629005D98F8 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -304,8 +302,7 @@
 		1EBBF9B12A85CC26000891DE /* MovieApp */ = {
 			isa = PBXGroup;
 			children = (
-				1EDE90C12A85DC3A000C821F /* AppDelegate.swift */,
-				1EDE90BC2A85D34B000C821F /* SceneDelegate.swift */,
+				422865322B7B0629005D98F8 /* AppDelegate.swift */,
 				1EDE90C32A8666FB000C821F /* Utils */,
 				1EBAA93D2A87D6B0006E6C11 /* Extensions */,
 				1E1469E52A8A821B00B8EEC3 /* UI */,
@@ -580,7 +577,6 @@
 				1EDE90A92A85CE40000C821F /* HomeInterfaces.swift in Sources */,
 				1EBAA9592A88BBB6006E6C11 /* MovieListEndpoint.swift in Sources */,
 				1EC9CC9B2A869BC300B337CE /* MovieListWireframe.swift in Sources */,
-				1EDE90C22A85DC3A000C821F /* AppDelegate.swift in Sources */,
 				1EBAA9572A88B3AB006E6C11 /* UserReviewModel.swift in Sources */,
 				1EDE90B42A85CEC5000C821F /* BaseWireframe.swift in Sources */,
 				1E1469D92A8A3DEC00B8EEC3 /* SeeMoreReusableView.swift in Sources */,
@@ -600,10 +596,10 @@
 				1E1469E22A8A7B4300B8EEC3 /* UserReviewsViewController.swift in Sources */,
 				1EDE90C82A867D8F000C821F /* NetworkService.swift in Sources */,
 				1EBAA95E2A88C83B006E6C11 /* MovieDetailEndpoints.swift in Sources */,
-				1EDE90BD2A85D34B000C821F /* SceneDelegate.swift in Sources */,
 				1EDE90BB2A85D246000C821F /* HomeModel.swift in Sources */,
 				1EBAA9382A87850C006E6C11 /* MovieListCell.swift in Sources */,
 				1EDE90AC2A85CE40000C821F /* HomeInteractor.swift in Sources */,
+				422865332B7B0629005D98F8 /* AppDelegate.swift in Sources */,
 				1EBAA9362A8781B3006E6C11 /* MovieAPIProtocol.swift in Sources */,
 				1E1469EB2A8A855200B8EEC3 /* UserReviewSection.swift in Sources */,
 				1EDE90C02A85D431000C821F /* GenreListCell.swift in Sources */,
