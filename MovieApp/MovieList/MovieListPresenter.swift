@@ -11,19 +11,19 @@
 import Foundation
 import UIKit
 
-final class MovieListPresenter {
+final class MovieListPresenter<View: MovieListViewInterface> {
 
     var page: Int = 1
     // MARK: - Private properties -
 
-    private weak var view: MovieListViewInterface?
+	private weak var view: View?
     private let interactor: MovieListInteractorInterface
     private let wireframe: MovieListWireframeInterface
 
     // MARK: - Lifecycle -
 
     init(
-        view: MovieListViewInterface?,
+        view: View?,
         interactor: MovieListInteractorInterface,
         wireframe: MovieListWireframeInterface
     ) {
@@ -37,23 +37,30 @@ final class MovieListPresenter {
 
 extension MovieListPresenter: MovieListPresenterInterface {
     
-    func discoverMovie() async throws {
-        
-        Task {
-            let movieListResult: TMDBApiResult<Movie>? = try? await interactor.discoverMovie(by: interactor.movieId, page: "\(page)")
-            
-            if let movies = movieListResult?.results as? [Movie] {
-                let movieListItem = movies.map { movie in
-                    MovieListItem(section: .movieList, type: .movieList(movie))
-                }
-                
-                view?.applySnapshot(item: movieListItem)
-            } else {
-                view?.showErrorState(message: "Fetch movies failed")
-            }
-            
-        }
-    }
+	func discoverMovie() async throws {
+		
+		var loadingItems: [MovieListItem] = []
+		
+		for _ in 0 ... 5 {
+			if let loadingItem = MovieListItem(section: .movieList, type: .loading) as? MovieListItem {
+				loadingItems.append(loadingItem)
+			}
+		}
+		
+		view?.setState(.loading(loadingItems as! View.ItemType))
+		
+		Task {
+			let movieListResult: TMDBApiResult<Movie>? = try? await interactor.discoverMovie(by: interactor.movieId, page: "\(page)")
+			
+			if let movieListItem = movieListResult?.results.map({ movie in
+				MovieListItem(section: .movieList, type: .movieList(movie))
+			}) as? View.ItemType {
+				view?.setState(.returnedResponse(.success(movieListItem)))
+			} else {
+				view?.setState(.returnedResponse(.failed("Fetch movies failed")))
+			}
+		}
+	}
     
     func navigate(to destination: MovieListNavigationOption, navigationController: UINavigationController?) {
         switch destination {

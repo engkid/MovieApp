@@ -19,7 +19,7 @@ final class MovieListWireframe: BaseWireframe<MovieListViewController> {
         super.init(viewController: moduleViewController)
 
         let interactor: MovieListInteractorInterface = MovieListInteractor(movieId: movieId)
-        let presenter = MovieListPresenter(view: moduleViewController, interactor: interactor, wireframe: self)
+        let presenter = MovieListPresenter<MovieListViewController>(view: moduleViewController, interactor: interactor, wireframe: self)
         moduleViewController.presenter = presenter
     }
 

@@ -17,6 +17,7 @@ enum MovieListSection: Int, CaseIterable, Hashable {
 
 enum MovieListCellType: Hashable {
     case movieList(Movie)
+	case loading
 }
 
 struct MovieListItem: Hashable {

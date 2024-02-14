@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SkeletonView
 
 final class MovieListCell: UICollectionViewCell {
     
@@ -13,6 +14,8 @@ final class MovieListCell: UICollectionViewCell {
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.numberOfLines = 2
+		titleLabel.skeletonTextNumberOfLines = 2
+		titleLabel.isSkeletonable = true
         return titleLabel
     }()
 
@@ -21,6 +24,7 @@ final class MovieListCell: UICollectionViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 10.0
+		imageView.isSkeletonable = true
         return imageView
     }()
     
@@ -28,6 +32,8 @@ final class MovieListCell: UICollectionViewCell {
         let yearLabel = UILabel()
         yearLabel.translatesAutoresizingMaskIntoConstraints = false
         yearLabel.font = UIFont.systemFont(ofSize: 14)
+		yearLabel.skeletonTextNumberOfLines = 1
+		yearLabel.isSkeletonable = true
         return yearLabel
     }()
     
@@ -47,8 +53,19 @@ final class MovieListCell: UICollectionViewCell {
         
         self.titleLabel.text = model.title
         self.yearLabel.text = model.releaseDate.formatToHumanReadableDate(inputFormat: "yyyy-MM-dd", outputFormat: "d MMMM yyyy")
-        
     }
+	
+	func showShimmer() {
+		moviePoster.showGradientSkeleton()
+		titleLabel.showGradientSkeleton()
+		yearLabel.showGradientSkeleton()
+	}
+	
+	func hideShimmer() {
+		moviePoster.hideSkeleton()
+		titleLabel.hideSkeleton()
+		yearLabel.hideSkeleton()
+	}
     
     private func setupViews() {
         

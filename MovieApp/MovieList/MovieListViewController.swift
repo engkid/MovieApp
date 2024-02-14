@@ -9,6 +9,7 @@
 //
 
 import UIKit
+import SkeletonView
 
 final class MovieListViewController: UIViewController {
 
@@ -129,10 +130,18 @@ final class MovieListViewController: UIViewController {
             switch itemIdentifier.type {
             case .movieList(let movie):
                 let cell = collectionView.dequeueReusableCell(withClass: MovieListCell.self, for: indexPath)
-                
+				
+				cell.hideShimmer()
+				
                 cell.configure(model: movie)
                 
                 return cell
+			case .loading:
+				let cell = collectionView.dequeueReusableCell(withClass: MovieListCell.self, for: indexPath)
+				
+				cell.showShimmer()
+				
+				return cell
             }
         }
         
@@ -149,34 +158,58 @@ final class MovieListViewController: UIViewController {
         }
         
     }
+	
+	private func updateViewState<T>(state: ViewState<T>) where T: Collection, T.Element == MovieListItem {
+		var snapshot = dataSource.snapshot()
+		
+		if !hasLoadedInitialData {
+			snapshot.appendSections([.movieList])
+			hasLoadedInitialData = true
+		}
+		
+		switch state {
+		case let .loading(items):
+			
+			guard let items = items as? [MovieListItem] else { return }
+			
+			snapshot.appendItems(items)
+			
+			dataSource.apply(snapshot, animatingDifferences: true)
+			
+			return
+		case .returnedResponse(.success(let items)):
+			
+			guard let items = items as? [MovieListItem] else { return }
+			
+			snapshot.deleteItems(snapshot.itemIdentifiers.filter { $0.section == .movieList && $0.type == .loading })
+			snapshot.appendItems(items)
+			
+			dataSource.apply(snapshot, animatingDifferences: true)
+			
+			isLoadingMore = false
+			
+		default:
+			return
+		}
+		
+	}
+	
+	private func showErrorState(message: String) {
+		ThreadManager.runOnMainThread {
+			self.showToast(with: message)
+		}
+	}
     
 }
 
 // MARK: - Extensions -
 
 extension MovieListViewController: MovieListViewInterface {
-    
-    func applySnapshot(item: [MovieListItem]) {
-        var snapshot = dataSource.snapshot()
-        
-        if !hasLoadedInitialData {
-            snapshot.appendSections([.movieList])
-            hasLoadedInitialData = true
-        }
-        
-        snapshot.appendItems(item)
-        
-        dataSource.apply(snapshot, animatingDifferences: true)
-        
-        isLoadingMore = false
-    }
-    
-    func showErrorState(message: String) {
-        ThreadManager.runOnMainThread {
-            self.showToast(with: message)
-        }
-    }
-    
+	
+	func setState(_ state: ViewState<[MovieListItem]>) {
+		updateViewState(state: state)
+	}
+
 }
 
 extension MovieListViewController: UICollectionViewDelegate {

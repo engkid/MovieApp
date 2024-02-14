@@ -9,6 +9,7 @@
 //
 
 import UIKit
+import SkeletonView
 
 final class HomeViewController: UIViewController {
     
@@ -26,16 +27,11 @@ final class HomeViewController: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.delegate = self
         collectionView.backgroundColor = .white
+		collectionView.isSkeletonable = true
         return collectionView
     }()
     
     private var dataSource: UICollectionViewDiffableDataSource<HomeSection, HomeItem>!
-    private lazy var loadingIndicator: UIActivityIndicatorView = {
-        let loadingIndicator = UIActivityIndicatorView(style: .medium)
-        loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
-        loadingIndicator.hidesWhenStopped = true
-        return loadingIndicator
-    }()
     
     // MARK: - Lifecycle -
 
@@ -43,7 +39,6 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         self.title = "Movie App"
         self.view.addSubview(collectionView)
-        self.view.addSubview(loadingIndicator)
         self.setupViews()
         self.configureDataSource()
         
@@ -60,9 +55,7 @@ final class HomeViewController: UIViewController {
             self.collectionView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: insets.top),
             self.collectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: insets.right),
             self.collectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: insets.left),
-            self.collectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: insets.bottom),
-            self.loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            self.loadingIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            self.collectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: insets.bottom)
         ])
         
     }
@@ -127,9 +120,9 @@ final class HomeViewController: UIViewController {
             switch itemIdentifier.type {
             case .genreList(let model):
                 let cell = collectionView.dequeueReusableCell(withClass: GenreListCell.self, for: indexPath) as GenreListCell
-                
-                cell.configure(model: model)
-                
+				
+				cell.configure(model: model)
+				
                 return cell
             }
         }
@@ -137,9 +130,9 @@ final class HomeViewController: UIViewController {
     
     private func toggleLoadingIndicator(_ isLoading: Bool) {
         if isLoading {
-            loadingIndicator.startAnimating()
+			self.collectionView.showSkeleton()
         } else {
-            loadingIndicator.stopAnimating()
+			self.collectionView.hideSkeleton()
         }
     }
 }
@@ -165,12 +158,14 @@ extension HomeViewController: HomeViewInterface {
     
     func showLoadingIndicator() {
         ThreadManager.runOnMainThread {
+			self.collectionView.showSkeleton()
             self.toggleLoadingIndicator(true)
         }
     }
     
     func hideLoadingIndicator() {
         ThreadManager.runOnMainThread {
+			self.collectionView.hideSkeleton()
             self.toggleLoadingIndicator(false)
         }
     }

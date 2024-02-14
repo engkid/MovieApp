@@ -67,6 +67,7 @@
 		1EDE90C82A867D8F000C821F /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE90C72A867D8F000C821F /* NetworkService.swift */; };
 		1EDE90CA2A868A11000C821F /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE90C92A868A11000C821F /* AppConstants.swift */; };
 		422865332B7B0629005D98F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422865322B7B0629005D98F8 /* AppDelegate.swift */; };
+		422865362B7B1156005D98F8 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 422865352B7B1156005D98F8 /* SkeletonView */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -157,6 +158,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				422865362B7B1156005D98F8 /* SkeletonView in Frameworks */,
 				1EBAA9682A892E65006E6C11 /* YouTubeiOSPlayerHelper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -433,6 +435,7 @@
 			name = MovieApp;
 			packageProductDependencies = (
 				1EBAA9672A892E65006E6C11 /* YouTubeiOSPlayerHelper */,
+				422865352B7B1156005D98F8 /* SkeletonView */,
 			);
 			productName = MovieApp;
 			productReference = 1EBBF9AF2A85CC26000891DE /* MovieApp.app */;
@@ -482,7 +485,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					1EBBF9AE2A85CC26000891DE = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -508,6 +511,7 @@
 			mainGroup = 1EBBF9A62A85CC26000891DE;
 			packageReferences = (
 				1EBAA9662A892E65006E6C11 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */,
+				422865342B7B1156005D98F8 /* XCRemoteSwiftPackageReference "SkeletonView" */,
 			);
 			productRefGroup = 1EBBF9B02A85CC26000891DE /* Products */;
 			projectDirPath = "";
@@ -688,6 +692,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -748,6 +753,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -950,6 +956,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		422865342B7B1156005D98F8 /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Juanpe/SkeletonView";
+			requirement = {
+				kind = exactVersion;
+				version = 1.30.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -957,6 +971,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1EBAA9662A892E65006E6C11 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */;
 			productName = YouTubeiOSPlayerHelper;
+		};
+		422865352B7B1156005D98F8 /* SkeletonView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 422865342B7B1156005D98F8 /* XCRemoteSwiftPackageReference "SkeletonView" */;
+			productName = SkeletonView;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

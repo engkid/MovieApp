@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SkeletonView
 
 final class GenreListCell: UICollectionViewCell {
     
@@ -13,6 +14,7 @@ final class GenreListCell: UICollectionViewCell {
         let genreLabel = UILabel()
         genreLabel.translatesAutoresizingMaskIntoConstraints = false
         genreLabel.text = "DummyGenre"
+		genreLabel.isHiddenWhenSkeletonIsActive = true
         return genreLabel
     }()
     
@@ -28,9 +30,15 @@ final class GenreListCell: UICollectionViewCell {
     func configure(model: MovieGenre) {
         self.genreLabel.text = model.name
     }
+	
+	override func layoutSubviews() {
+		super.layoutSubviews()
+		layoutSkeletonIfNeeded()
+	}
     
     private func setupViews() {
-        
+		self.isSkeletonable = true
+		
         contentView.addSubview(genreLabel)
         
         NSLayoutConstraint.activate([

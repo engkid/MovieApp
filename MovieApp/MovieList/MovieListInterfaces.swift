@@ -10,13 +10,25 @@
 
 import UIKit
 
+enum ViewState<T> {
+	case loading(T)
+	case returnedResponse(ResponseStatus<T>)
+}
+
+enum ResponseStatus<T> {
+	case success(T)
+	case failed(String)
+}
+
 protocol MovieListWireframeInterface: WireframeInterface {
     func navigateToMovieDetails(destination: MovieListNavigationOption, _ navigationController: UINavigationController?)
 }
 
 protocol MovieListViewInterface: ViewInterface {
-    func applySnapshot(item: [MovieListItem])
-    func showErrorState(message: String)
+	
+	associatedtype ItemType
+	
+	func setState(_ state: ViewState<ItemType>)
 }
 
 protocol MovieListPresenterInterface: PresenterInterface {

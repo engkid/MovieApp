@@ -45,13 +45,13 @@ extension UICollectionView {
     
     func dequeueHeader<T>(_ header: T.Type, indexPath: IndexPath) -> T where T: UICollectionReusableView {
         let view = self.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: String(describing: header.self), for: indexPath)
-        guard let reusableView = view as? T else { fatalError("Invalid view type") }
+		guard let reusableView = view as? T else { fatalError("\(#function) - \(#line)") }
         return reusableView
     }
     
     func dequeueFooter<T>(_ footer: T.Type, indexPath: IndexPath) -> T where T: UICollectionReusableView {
         let view = self.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: String(describing: footer.self), for: indexPath)
-        guard let reusableView = view as? T else { fatalError("Invalid view type") }
+		guard let reusableView = view as? T else { fatalError("\(#function) - \(#line)") }
         return reusableView
     }
     
