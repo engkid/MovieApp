@@ -62,11 +62,11 @@ extension MovieListPresenter: MovieListPresenterInterface {
 		}
 	}
     
-    func navigate(to destination: MovieListNavigationOption, navigationController: UINavigationController?) {
-        switch destination {
-        case .movieDetails(let movie):
-            wireframe.navigateToMovieDetails(destination: .movieDetails(movie), navigationController)
-        }
-    }
-    
+	func navigate(to destination: MovieListNavigationOption, navigationController: UINavigationController?) {
+		switch destination {
+		case .movieDetails(let movie):
+			wireframe.navigateToMovieDetails(destination: .movieDetails(movie), navigationController)
+		}
+	}
+	
 }

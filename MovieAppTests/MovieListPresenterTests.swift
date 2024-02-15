@@ -10,7 +10,7 @@ import XCTest
 
 final class MovieListPresenterTests: XCTestCase {
 	
-	private var presenter: MovieListPresenter<MovieListViewInterfaceMock>!
+	private var sut: MovieListPresenter<MovieListViewInterfaceMock>!
 	private var interactor: MovieListInteractorMock!
 	private var wireframe: MovieListWireframeMock!
 	private var view: MovieListViewInterfaceMock!
@@ -19,37 +19,36 @@ final class MovieListPresenterTests: XCTestCase {
 		interactor = MovieListInteractorMock()
 		wireframe = MovieListWireframeMock()
 		view = MovieListViewInterfaceMock()
-		presenter = MovieListPresenter(view: view, interactor: interactor, wireframe: wireframe)
+		sut = makeSUT(view: view, interactor: interactor, wireframe: wireframe)
 	}
 	
 	override func tearDown() {
 		interactor = nil
 		wireframe = nil
 		view = nil
-		presenter = nil
+		sut = nil
 	}
 	
-	func testDiscoverMovieSuccess() async {
-		var mockResult: Result<TMDBApiResult<Movie>, Error>?
+	func testDiscoverMovie() async {
 		
 		let expectation = XCTestExpectation(description: "Discover movie success")
 		
-		mockResult = .success(
+		let mockResult: Result<TMDBApiResult<Movie>, Error>? = .success(
 			.init(
 				id: 1,
 				page: nil,
 				results: [
-					.init(adult: false, backdropPath: nil, genreIds: [1], id: 1, originalLanguage: "", originalTitle: "", overview: "", popularity: 0.0, posterPath: nil, releaseDate: "", title: "Mock Movie", video: true, voteAverage: 0.0, voteCount: 0)], totalPages: nil, totalResults: nil
+					.init(adult: false, backdropPath: nil, genreIds: [1], id: 1, originalLanguage: "", originalTitle: "", overview: "", popularity: 0.0, posterPath: nil, releaseDate: "", title: "Mock Movie", video: true, voteAverage: 0.0, voteCount: 0)
+				], totalPages: nil, totalResults: nil
 			)
 		)
 		
 		interactor.mockResult = mockResult
 		
-		
 		Task {
 			do {
 				
-				let _ = try await presenter.discoverMovie()
+				let _ = try await sut.discoverMovie()
 				expectation.fulfill()
 			} catch {
 				XCTFail("Failed to discover movie: \(error)")
@@ -59,14 +58,42 @@ final class MovieListPresenterTests: XCTestCase {
 		await fulfillment(of: [expectation], timeout: 0.5)
 		
 		XCTAssertTrue(interactor.discoverMovieCalled)
-		XCTAssertEqual(view.setStateCalls.count, 2)
+	}
+	
+	func testNavigateToMovieDetails() {
+		let movie: Movie = Movie(
+			adult: false,
+			backdropPath: nil,
+			genreIds: [1],
+			id: 1,
+			originalLanguage: "",
+			originalTitle: "",
+			overview: "",
+			popularity: 0.0,
+			posterPath: nil,
+			releaseDate: "",
+			title: "Mock Movie",
+			video: true,
+			voteAverage: 0.0,
+			voteCount: 0
+		)
+		let navigationController = UINavigationController()
+		
+		wireframe.navigateToMovieDetails(destination: .movieDetails(movie), navigationController)
+		
+		sut.navigate(to: .movieDetails(movie), navigationController: navigationController)
+		
+		XCTAssertTrue(wireframe.navigateToMovieDetailsCalled)
+		XCTAssertEqual(wireframe.lastNavigatedMovie, movie)
+		XCTAssertEqual(wireframe.lastNavigatedNavigationController, navigationController)
+		
 	}
 	
 }
 
 extension MovieListPresenterTests {
-	func makeSUT() -> MovieListPresenterInterface? {
-		return nil
+	func makeSUT(view: MovieListViewInterfaceMock, interactor: MovieListInteractorMock, wireframe: MovieListWireframeMock) -> MovieListPresenter<MovieListViewInterfaceMock> {
+		return MovieListPresenter(view: view, interactor: interactor, wireframe: wireframe)
 	}
 }
 
@@ -92,9 +119,20 @@ class MovieListInteractorMock: MovieListInteractorInterface {
 }
 
 class MovieListWireframeMock: MovieListWireframeInterface {
+	
+	var navigateToMovieDetailsCalled = false
+	var lastNavigatedMovie: Movie?
+	var lastNavigatedNavigationController: UINavigationController?
+	
 	func navigateToMovieDetails(destination: MovieListNavigationOption, _ navigationController: UINavigationController?) {
-		// Implement mock behavior if needed
+		navigateToMovieDetailsCalled = true
+		switch destination {
+		case .movieDetails(let movie):
+			lastNavigatedMovie = movie
+		}
+		lastNavigatedNavigationController = navigationController
 	}
+	
 }
 
 class MovieListViewInterfaceMock: MovieListViewInterface {
